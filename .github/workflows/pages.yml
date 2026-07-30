@@ -14,11 +14,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true   # remove if your theme isn't a submodule
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install pelican markdown
-      - run: pelican content -o output -s pelicanconf.py
+
+      - name: Install dependencies
+        run: |
+          pip install pelican markdown
+          # if you have a requirements.txt, use this instead:
+          # pip install -r requirements.txt
+
+      - name: Build site
+        run: pelican content -o output -s pelicanconf.py
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: output
