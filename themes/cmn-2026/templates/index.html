@@ -57,7 +57,7 @@
   <div class="collaborator-grid">
     {% for collaborator in collaborators %}
     <article class="collaborator-card">
-      <a href="{{ collaborator.external_url }}">
+      <a href="{% if collaborator.external_url.startswith('/') %}{{ SITEURL }}{{ collaborator.external_url }}{% else %}{{ collaborator.external_url }}{% endif %}">
         <span class="collaborator-icon">
           {% if collaborator.icon %}
           <img src="{{ SITEURL }}/theme/images/collaborators/{{ collaborator.icon }}" alt="">
