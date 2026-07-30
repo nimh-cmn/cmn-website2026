@@ -1,0 +1,2 @@
+pelican[markdown]>=4.9,<5
+invoke>=2,<3

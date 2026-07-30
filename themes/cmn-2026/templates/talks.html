@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Talks | {{ SITENAME }}{% endblock %}
+{% block content %}
+<section class="page">
+  <header class="page-header">
+    <h1>Talks</h1>
+    <p>CMN presentation series and Machine Learning in Brain Imaging talks.</p>
+  </header>
+  <div class="filter-tabs" role="tablist" aria-label="Filter talks by series">
+    <button class="filter-tab is-active" type="button" data-talk-filter="all">
+      All <span>{{ talks|length }}</span>
+    </button>
+    {% for series in talk_series_filters %}
+    <button class="filter-tab" type="button" data-talk-filter="{{ series.slug }}">
+      {{ series.label }} <span>{{ series.count }}</span>
+    </button>
+    {% endfor %}
+  </div>
+  <div class="item-list">
+    {% for talk in talks %}
+    <article class="talk-list-item" data-talk-series="{{ talk.series_slugs|join(' ') }}">
+      <p class="meta">{{ talk.talk_month }}</p>
+      <h2><a href="{{ SITEURL }}{{ talk.url }}">{{ talk.title }}</a></h2>
+      {% if talk.part_of_links %}
+      <p class="meta">
+        {% for link in talk.part_of_links %}
+          <a href="{{ link.href }}">{{ link.label }}</a>{% if not loop.last %}, {% endif %}
+        {% endfor %}
+      </p>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+</section>
+<script>
+  document.querySelectorAll('[data-talk-filter]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const filter = button.dataset.talkFilter;
+      document.querySelectorAll('[data-talk-filter]').forEach((tab) => {
+        tab.classList.toggle('is-active', tab === button);
+      });
+      document.querySelectorAll('.talk-list-item').forEach((talk) => {
+        const show = filter === 'all' || talk.dataset.talkSeries.split(' ').includes(filter);
+        talk.hidden = !show;
+      });
+    });
+  });
+</script>
+{% endblock %}

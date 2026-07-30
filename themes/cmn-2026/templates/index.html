@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}{{ SITENAME }}{% endblock %}
+{% block content %}
+<section class="hero">
+  <header class="hero-header">
+    <h1>Center for Multimodal Neuroimaging</h1>
+    <p class="hero-byline">Connecting neuroimaging methods, machine learning, and open data at NIMH.</p>
+  </header>
+  <figure class="hero-figure">
+    <img class="hero-image" src="{{ SITEURL }}/theme/images/collaborative-cores-and-teams.png" alt="Collaborative cores and teams connected by multimodal neuroimaging">
+  </figure>
+  <div class="hero-copy">
+    <p>
+      CMN brings together NIMH neuroimaging, processing, and neuromodulation expertise
+      so communication is stronger between cores, sections, units, staff scientists,
+      and users.
+    </p>
+    <p>
+      This integration fosters collaborative bridges, gives users a centralized view
+      of available resources, and helps generate questions suited to cross-modal
+      investigation. The Center connects NIMH-based core facilities in neuroimaging,
+      image data processing, and neuromodulation with the Machine Learning and Data
+      Science and Sharing Teams.
+    </p>
+    <p>
+      Operationally, each core and team remains independent. CMN convenes regular
+      meetings around practical needs such as harmonized data structures, shared
+      processing methods, multimodal integration, and data sharing. This site is a
+      clearinghouse for what is available across the network.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-heading">
+    <h2>Groups</h2>
+    <a class="text-link" href="{{ SITEURL }}/groups/">View all groups</a>
+  </div>
+  <div class="group-grid">
+    {% for group in cmn_groups %}
+    <article class="group-card">
+      <p class="eyebrow">{{ group.short_name }}</p>
+      <h3><a href="{{ SITEURL }}{{ group.url }}">{{ group.title }}</a></h3>
+      <p>{{ group.summary|striptags }}</p>
+      {% if group.lead %}
+      <p class="meta">Lead: {{ group.lead }}</p>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-heading">
+    <h2>Collaborative Cores and Teams</h2>
+  </div>
+  <div class="collaborator-grid">
+    {% for collaborator in collaborators %}
+    <article class="collaborator-card">
+      <a href="{{ collaborator.external_url }}">
+        <span class="collaborator-icon">
+          {% if collaborator.icon %}
+          <img src="{{ SITEURL }}/theme/images/collaborators/{{ collaborator.icon }}" alt="">
+          {% else %}
+          <span>{{ collaborator.icon_label or collaborator.short_name }}</span>
+          {% endif %}
+        </span>
+        <span>
+          <strong>{{ collaborator.title }}</strong>
+          {% if collaborator.lead %}<small>Director: {{ collaborator.lead }}</small>{% endif %}
+        </span>
+      </a>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section two-column">
+  <div>
+    <h2>Recent Talks</h2>
+    <div class="item-list">
+      {% for talk in talks[:5] %}
+      <article>
+        <p class="meta">{{ talk.talk_month }}</p>
+        <h3><a href="{{ SITEURL }}{{ talk.url }}">{{ talk.title }}</a></h3>
+      </article>
+      {% endfor %}
+    </div>
+    <a class="button" href="{{ SITEURL }}/talks/">All talks</a>
+  </div>
+  <div>
+    <h2>News and Workshops</h2>
+    <div class="item-list">
+      {% for post in posts_list[:5] %}
+      <article>
+        <p class="meta">{{ post.workshop_time }}</p>
+        <h3><a href="{{ SITEURL }}{{ post.url }}">{{ post.title }}</a></h3>
+      </article>
+      {% endfor %}
+    </div>
+    <a class="button" href="{{ SITEURL }}/posts/">All news</a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-heading">
+    <h2>Tools / Software</h2>
+    <a class="text-link" href="{{ SITEURL }}/software/">View all tools</a>
+  </div>
+  <div class="software-grid">
+    {% for tool in software[:4] %}
+    {% include "partials/software-card.html" %}
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

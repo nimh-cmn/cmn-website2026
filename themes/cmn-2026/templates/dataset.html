@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} | {{ SITENAME }}{% endblock %}
+{% block content %}
+<article class="page">
+  <header class="page-header">
+    <p class="eyebrow">DSST Dataset{% if study_id %} · {{ study_id }}{% endif %}</p>
+    <h1>{{ title }}</h1>
+  </header>
+  <p class="workshop-actions">
+    {% if dataset_url %}<a class="button" href="{{ dataset_url }}">Open Dataset</a>{% endif %}
+    {% if publication_url %}<a class="button button-outline" href="{{ publication_url }}">View Publication</a>{% endif %}
+    <a class="button button-outline" href="{{ SITEURL }}/dsst/datasets/">All DSST Datasets</a>
+  </p>
+  <dl class="metadata-list">
+    {% for label, value in (
+      ("Status", status),
+      ("Data Use Agreement", data_use_agreement),
+      ("Number of Subjects", number_of_subjects),
+      ("Sample Size", sample_size),
+      ("Modalities", modalities),
+      ("Age Range", age_range),
+      ("Functional Tasks", func_tasks),
+      ("Current Release Date", current_release_date),
+      ("Initial Release Date", initial_release_date),
+      ("Download Date", download_date),
+      ("Path on NIH HPC", hpc_path)
+    ) %}
+      {% if value %}
+      <dt>{{ label }}</dt>
+      <dd>{{ value }}</dd>
+      {% endif %}
+    {% endfor %}
+  </dl>
+  {% if content %}<div class="prose">{{ content }}</div>{% endif %}
+</article>
+{% endblock %}

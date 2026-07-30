@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}
+Series
+{% endblock %}
+{% block content %}
+<div class="views-element-container">
+    <div
+        class="view view-series view-id-series view-display-id-page_1 js-view-dom-id-915b5efc269d65cd8abc0343cf7d217e7e64c93278c44e376e368f0a1b969be1">
+
+
+
+        <div class="view-content">
+            {% for series in series_list %}
+            <div class="views-row">
+                <div class="views-field views-field-rendered-entity"><span class="field-content">
+                        <article aria-labelledby="node-title-45" class="node node--type-series node--view-mode-teaser">
+
+                            <h2 id="node-title-45">
+                                <a href="{{ SITEURL }}/{{ series.title }}" rel="bookmark"><span
+                                        class="field field--name-title field--type-string field--label-hidden">
+                                        {{ series.name }}</span>
+                                </a>
+                            </h2>
+
+
+
+                            <div class="node__content">
+
+                                <div
+                                    class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+                                    {{ series.content }}
+                                </div>
+
+                            </div>
+
+                        </article>
+                    </span></div>
+            </div>
+            {% endfor %}
+           
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock %}

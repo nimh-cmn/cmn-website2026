@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+{% block title %}
+Data Science and Sharing Team
+{% endblock %}
+{% block content %}
+<div class="node__content">
+  <div
+     class="field field--name-field-paragraphs field--type-entity-reference-revisions field--label-hidden field__items">
+     <div class="field__item">
+        <div class="paragraph paragraph--type--text paragraph--view-mode--default">
+           <div
+              class="clearfix text-formatted field field--name-field-text field--type-text-long field--label-hidden field__item">
+              <p>The Data Science and Sharing Team supports investigators within the NIMH intramural program in creating,
+                 distributing, and leveraging large, open datasets to accelerate discovery. We provide tools and training to
+                 help the IRP embrace open science and stay on the cutting edge of novel datasets, tools, and platforms. You
+                 can find a summary of our recent activities in our <a
+                    class="file file--mime-application-pdf file--application-pdf" data-entity-type="file"
+                    data-entity-uuid="0c7899e9-118c-4259-8b6d-d9f7af38597f" filename="DSST_BSC_Dec_2023_0.pdf"
+                    href="{{SITEURL}}/assets/DSST_BSC_Dec_2023_0.pdf">Board of Scientific Counsellors
+                 report</a>.&nbsp;
+              </p>
+           </div>
+        </div>
+     </div>
+     <div class="field__item">
+        <div class="paragraph paragraph--type--links paragraph--view-mode--default">
+           <div class="field field--name-field-links field--type-link field--label-visually_hidden">
+              <div class="field__label visually-hidden">Links</div>
+              <ul class="field__items">
+                 <li class="field__item"><a
+                    href="https://docs.google.com/spreadsheets/d/1t1VtW_ScMunEcrloxIv8197ezHQXCZQq_dxsSrH7SQI/edit?usp=sharing">List
+                    of public datasets we have or are working on</a>
+                 </li>
+              </ul>
+           </div>
+        </div>
+     </div>
+     <div class="field__item">
+        <div class="paragraph paragraph--type--text paragraph--view-mode--default">
+           <div
+              class="clearfix text-formatted field field--name-field-text field--type-text-long field--label-hidden field__item">
+              <p>NIMH Investigators are invited&nbsp;to comment on the spreadsheet linked above to request updates, changes,
+                 or additions the datasets we are curating
+              </p>
+           </div>
+        </div>
+     </div>
+  </div>
+  <div
+     class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+     <p>The Data Science and Sharing Team supports investigators within the NIMH intramural program in creating,
+        distributing, and leveraging large, open datasets to accelerate discovery. We provide tools and training to help
+        the IRP embrace open science and stay on the cutting edge of novel datasets, tools, and platforms.&nbsp;
+     </p>
+  </div>
+  <div class="field field--name-field-team-m field--type-entity-reference field--label-visually_hidden">
+     <div class="field__label visually-hidden">Team Members</div>
+     <div class="field__items">
+        {% for person in teams_dsst %}
+        {% if person.place == "Member" %}
+        <div class="field__item">
+           <article aria-labelledby="node-title-7" class="node node--type-person node--view-mode-team-photo">
+              <h2 id="node-title-7">
+                 <a href="{{SITEURL}}/people/{{person.slug}}" rel="bookmark"><span
+                    class="field field--name-title field--type-string field--label-hidden">{{person.title}}</span>
+                 </a>
+              </h2>
+              <div class="node__content">
+                 <div class="field field--name-field-photo field--type-image field--label-hidden field__item"> <img
+                    loading="lazy"  src="{{SITEURL}}/{{static}}/images/{{person.image}}"
+                    width="150" height="150" alt="" class="image-style-photo">
+                 </div>
+                 <div class="field field--name-field-job-title field--type-string field--label-visually_hidden">
+                    <div class="field__label visually-hidden">Job title</div>
+                    <div class="field__item">{{person.position}}</div>
+                 </div>
+                 <div class="field field--name-field-links field--type-link field--label-visually_hidden">
+                    <div class="field__label visually-hidden">Links</div>
+                    <ul class="field__items">
+                        {% if person.impactstory %}
+                        <li class="field__item"><a href="{{person.impactstory}}">Impactstory</a></li>
+                        {% endif %}
+                        {% if person.linkedin %}
+                        <li class="field__item"><a href="{{person.linkedin}}">LinkedIn</a></li>
+                        {% endif %}
+                        {% if person.scholar %}
+                        <li class="field__item"><a href="{{person.scholar}}">Scholar</a></li>
+                        {% endif %}
+                        {% if person.github %}
+                        <li class="field__item"><a href="{{person.github}}">GitHub</a></li>
+                        {% endif %}
+                        {% if person.openalex %}
+                        <li class="field__item"><a href="{{person.openalex}}">OpenAlex</a></li>
+                        {% endif %}
+                        {% if person.google_scholar_profile %}
+                        <li class="field__item"><a href="{{person.google_scholar_profile}}">Google Scholar Profile</a></li>
+                        {% endif %}
+                        {% if person.website %}
+                        <li class="field__item"><a href="{{person.website}}">Website</a></li>
+                        {% endif %}
+                        {% if person.lab_website %}
+                        <li class="field__item"><a href="{{person.lab_website}}">Lab Website</a></li>
+                        {% endif %}
+                        {% if person.webpage %}
+                        <li class="field__item"><a href="{{person.webpage}}">Webpage</a></li>
+                        {% endif %}
+                        {% if person.open_neuro_pet %}
+                        <li class="field__item"><a href="{{person.open_neuro_pet}}">OpenNeuroPET</a></li>
+                        {% endif %}
+                        {% if person.personal_website %}
+                        <li class="field__item"><a href="{{person.personal_website}}">Personal Website</a></li>
+                        {% endif %}
+                        {% if person.research_gate_profile %}
+                        <li class="field__item"><a href="{{person.research_gate_profile}}">ResearchGate profile</a></li>
+                        {% endif %}
+                        {% if person.impactstory_profile %}
+                        <li class="field__item"><a href="{{person.impactstory_profile}}">Impactstory Profile</a></li>
+                        {% endif %}
+                        {% if person.twitter %}
+                        <li class="field__item"><a href="{{person.twitter}}">Twitter</a></li>
+                        {% endif %}
+                        {% if person.google_scholar %}
+                        <li class="field__item"><a href="{{person.google_scholar}}">Google Scholar</a></li>
+                        {% endif %}
+                        {% if person.slide_share %}
+                        <li class="field__item"><a href="{{person.slide_share}}">SlideShare</a></li>
+                        {% endif %}
+                        {% if person.upenn_website %}
+                        <li class="field__item"><a href="{{person.upenn_website}}">UPenn Website</a></li>
+                        {% endif %}
+                        {% if person.research_gate %}
+                        <li class="field__item"><a href="{{person.research_gate}}">ResearchGate</a></li>
+                        {% endif %}
+                        {% if person.umd_honors_college_profile %}
+                        <li class="field__item"><a href="{{person.umd_honors_college_profile}}">UMD Honors College Profile</a></li>
+                        {% endif %}
+                        {% if person.orcid %}
+                        <li class="field__item"><a href="{{person.orcid}}">ORCID</a></li>
+                        {% endif %}
+                        {% if person.science_blog %}
+                        <li class="field__item"><a href="{{person.science_blog}}">Science Blog</a></li>
+                        {% endif %}
+                        {% if person.sfim_profile %}
+                        <li class="field__item"><a href="{{person.sfim_profile}}">SFIM Profile</a></li>
+                        {% endif %}
+                    </ul>
+                 </div>
+              </div>
+           </article>
+        </div>
+        {% endif %}
+        {% endfor %}
+     </div>
+  </div>
+  <div class="views-element-container"></div>
+  <div class="views-element-container"></div>
+  <div class="field field--name-field-fm field--type-entity-reference field--label-above">
+     <div class="field__label">Former Team Members</div>
+     <div class="field__items">
+      {% for person in teams_dsst %}
+      {% if person.place == "Former Team Members" %}
+      <div class="field__item">
+         <article aria-labelledby="node-title-7" class="node node--type-person node--view-mode-team-photo">
+            <h2 id="node-title-7">
+               <a href="{{SITEURL}}/people/{{person.slug}}" rel="bookmark"><span
+                  class="field field--name-title field--type-string field--label-hidden">{{person.title}} 
+                  </span>
+                  
+                  
+               
+               </a>
+            </h2>
+            <div class="node__content">
+               <div class="field field--name-field-photo field--type-image field--label-hidden field__item"> <img
+                  loading="lazy"  src="{{SITEURL}}/{{static}}/images/{{person.image}}"
+                  width="150" height="150" alt="" class="image-style-photo">
+               </div>
+               <div class="field field--name-field-job-title field--type-string field--label-visually_hidden">
+                  <div class="field__label visually-hidden">Job title</div>
+                  <div class="field__item">{{person.position}}</div>
+                  {% if person.subheading %}
+                  <span>{{person.subheading}} </span>
+                  {% endif %}
+               </div>
+               <div class="field field--name-field-links field--type-link field--label-visually_hidden">
+                  <div class="field__label visually-hidden">Links</div>
+                  <ul class="field__items">
+                     {% if person.impactstory %}
+                     <li class="field__item"><a href="{{person.impactstory}}">Impactstory</a></li>
+                     {% endif %}
+                     {% if person.linkedin %}
+                     <li class="field__item"><a href="{{person.linkedin}}">LinkedIn</a></li>
+                     {% endif %}
+                     {% if person.scholar %}
+                     <li class="field__item"><a href="{{person.scholar}}">Scholar</a></li>
+                     {% endif %}
+                     {% if person.github %}
+                     <li class="field__item"><a href="{{person.github}}">GitHub</a></li>
+                     {% endif %}
+                     {% if person.openalex %}
+                     <li class="field__item"><a href="{{person.openalex}}">OpenAlex</a></li>
+                     {% endif %}
+                     {% if person.google_scholar_profile %}
+                     <li class="field__item"><a href="{{person.google_scholar_profile}}">Google Scholar Profile</a></li>
+                     {% endif %}
+                     {% if person.website %}
+                     <li class="field__item"><a href="{{person.website}}">Website</a></li>
+                     {% endif %}
+                     {% if person.lab_website %}
+                     <li class="field__item"><a href="{{person.lab_website}}">Lab Website</a></li>
+                     {% endif %}
+                     {% if person.webpage %}
+                     <li class="field__item"><a href="{{person.webpage}}">Webpage</a></li>
+                     {% endif %}
+                     {% if person.open_neuro_pet %}
+                     <li class="field__item"><a href="{{person.open_neuro_pet}}">OpenNeuroPET</a></li>
+                     {% endif %}
+                     {% if person.personal_website %}
+                     <li class="field__item"><a href="{{person.personal_website}}">Personal Website</a></li>
+                     {% endif %}
+                     {% if person.research_gate_profile %}
+                     <li class="field__item"><a href="{{person.research_gate_profile}}">ResearchGate profile</a></li>
+                     {% endif %}
+                     {% if person.impactstory_profile %}
+                     <li class="field__item"><a href="{{person.impactstory_profile}}">Impactstory Profile</a></li>
+                     {% endif %}
+                     {% if person.twitter %}
+                     <li class="field__item"><a href="{{person.twitter}}">Twitter</a></li>
+                     {% endif %}
+                     {% if person.google_scholar %}
+                     <li class="field__item"><a href="{{person.google_scholar}}">Google Scholar</a></li>
+                     {% endif %}
+                     {% if person.slide_share %}
+                     <li class="field__item"><a href="{{person.slide_share}}">SlideShare</a></li>
+                     {% endif %}
+                     {% if person.upenn_website %}
+                     <li class="field__item"><a href="{{person.upenn_website}}">UPenn Website</a></li>
+                     {% endif %}
+                     {% if person.research_gate %}
+                     <li class="field__item"><a href="{{person.research_gate}}">ResearchGate</a></li>
+                     {% endif %}
+                     {% if person.umd_honors_college_profile %}
+                     <li class="field__item"><a href="{{person.umd_honors_college_profile}}">UMD Honors College Profile</a></li>
+                     {% endif %}
+                     {% if person.orcid %}
+                     <li class="field__item"><a href="{{person.orcid}}">ORCID</a></li>
+                     {% endif %}
+                     {% if person.science_blog %}
+                     <li class="field__item"><a href="{{person.science_blog}}">Science Blog</a></li>
+                     {% endif %}
+                     {% if person.sfim_profile %}
+                     <li class="field__item"><a href="{{person.sfim_profile}}">SFIM Profile</a></li>
+                     {% endif %}
+                  </ul>
+               </div>
+            </div>
+         </article>
+      </div>
+      {% endif %}
+      {% endfor %}
+  </div>
+</div>
+{% endblock %}

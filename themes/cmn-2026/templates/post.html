@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} | {{ SITENAME }}{% endblock %}
+{% block content %}
+<article class="page">
+  <header class="page-header">
+    <p class="eyebrow">{{ workshop_time }}</p>
+    <h1>{{ title }}</h1>
+  </header>
+  {% if short_description %}<div class="prose">{{ short_description }}</div>{% endif %}
+  {% if item.links or schedule %}
+    <div class="workshop-actions">
+      {% for link in item.links %}
+        <a class="button" href="{{ link.href }}">{{ link.label }}</a>
+      {% endfor %}
+      {% if schedule %}
+        <a class="button button-outline" href="{{ SITEURL }}/assets/{{ schedule }}">Download schedule</a>
+      {% endif %}
+    </div>
+  {% endif %}
+  {% if description %}<div class="prose">{{ description }}</div>{% endif %}
+  {% if item.speakers %}
+    <section class="subsection workshop-speakers" aria-labelledby="speaker-heading">
+      <h2 id="speaker-heading">Speakers</h2>
+      <div class="speaker-grid">
+        {% for speaker in item.speakers %}
+          <article class="speaker-card{% if not speaker.image or speaker.image == 'none' %} speaker-card-no-image{% endif %}">
+            {% if speaker.image and speaker.image != 'none' %}
+              {% if speaker.link %}
+                <a class="speaker-photo-link" href="{{ speaker.link }}" aria-label="{{ speaker.name }}">
+                  <img src="{{ SITEURL }}/images/{{ speaker.image }}" alt="{{ speaker.name }}">
+                </a>
+              {% else %}
+                <img src="{{ SITEURL }}/images/{{ speaker.image }}" alt="{{ speaker.name }}">
+              {% endif %}
+            {% endif %}
+            <div>
+              <h3>
+                {% if speaker.link %}<a href="{{ speaker.link }}">{{ speaker.name }}</a>{% else %}{{ speaker.name }}{% endif %}
+              </h3>
+              {% if speaker.affiliation %}<p class="speaker-affiliation">{{ speaker.affiliation }}</p>{% endif %}
+              {% if speaker.talk_title %}<p class="speaker-title">Talk: {{ speaker.talk_title }}</p>{% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+  <div class="prose">{{ content }}</div>
+</article>
+{% endblock %}

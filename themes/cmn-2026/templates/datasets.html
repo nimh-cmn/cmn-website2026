@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}DSST Curated Datasets | {{ SITENAME }}{% endblock %}
+{% block content %}
+<article class="page page-wide datasets-page">
+  <header class="page-header">
+    <p class="eyebrow">DSST</p>
+    <h1>DSST Curated Datasets</h1>
+    <p>Public datasets curated or tracked by the Data Science and Sharing Team.</p>
+  </header>
+  <div class="prose">
+    <p>The Data Science and Sharing Team curates and tracks public datasets that may be useful for NIMH intramural researchers. Each row below is generated from a Markdown record in <code>content/dsst/datasets</code>.</p>
+    <p>This table currently lists <strong>{{ datasets|length }} datasets</strong>.</p>
+  </div>
+  <div class="dataset-table-wrap">
+    <table class="dataset-table">
+      <thead>
+        <tr>
+          <th>Study ID</th>
+          <th>Dataset</th>
+          <th>Status</th>
+          <th>Data Use</th>
+          <th>Subjects</th>
+          <th>Sample Size</th>
+          <th>Modalities</th>
+          <th>Age Range</th>
+          <th>Tasks</th>
+          <th>Current Release</th>
+          <th>Download Date</th>
+          <th>HPC Path</th>
+          <th>Links</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for dataset in datasets %}
+        <tr>
+          <td>{{ dataset.study_id }}</td>
+          <td><a href="{{ SITEURL }}{{ dataset.url }}">{{ dataset.title }}</a></td>
+          <td>{{ dataset.status }}</td>
+          <td>{{ dataset.data_use_agreement }}</td>
+          <td>{{ dataset.number_of_subjects }}</td>
+          <td>{{ dataset.sample_size }}</td>
+          <td>{{ dataset.modalities }}</td>
+          <td>{{ dataset.age_range }}</td>
+          <td>{{ dataset.func_tasks }}</td>
+          <td>{{ dataset.current_release_date }}</td>
+          <td>{{ dataset.download_date }}</td>
+          <td>{{ dataset.hpc_path }}</td>
+          <td>
+            {% if dataset.dataset_url %}<a href="{{ dataset.dataset_url }}">Dataset</a>{% endif %}
+            {% if dataset.dataset_url and dataset.publication_url %}<br>{% endif %}
+            {% if dataset.publication_url %}<a href="{{ dataset.publication_url }}">Publication</a>{% endif %}
+          </td>
+          <td>{{ dataset.comments }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="prose">
+    <p>NIMH investigators can contact DSST to request updates, corrections, or additions to this curated dataset list.</p>
+  </div>
+</article>
+{% endblock %}

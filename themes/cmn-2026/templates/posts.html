@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}News | {{ SITENAME }}{% endblock %}
+{% block content %}
+<section class="page">
+  <header class="page-header">
+    <h1>News and Workshops</h1>
+  </header>
+  <div class="item-list">
+    {% for post in posts_list %}
+    <article>
+      <p class="meta">{{ post.workshop_time }}</p>
+      <h2><a href="{{ SITEURL }}{{ post.url }}">{{ post.title }}</a></h2>
+      {% if post.short_description %}<p>{{ post.short_description|striptags|truncate(280) }}</p>{% endif %}
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

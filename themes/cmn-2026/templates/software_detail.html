@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} | {{ SITENAME }}{% endblock %}
+{% block content %}
+<article class="page">
+  <header class="page-header">
+    <p class="eyebrow">Tool / Software</p>
+    <h1>{{ title }}</h1>
+    {% if summary %}<p>{{ summary|striptags }}</p>{% endif %}
+  </header>
+  <div class="prose">{{ content }}</div>
+  {% if external_url %}
+  <p><a class="button" href="{{ external_url }}">Open Tool</a></p>
+  {% endif %}
+</article>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} | {{ SITENAME }}{% endblock %}
+{% block content %}
+<article class="page person-profile">
+  <aside>
+    {% if image %}<img class="profile-photo" src="{{ SITEURL }}/images/{{ image }}" alt="{{ title }}">{% endif %}
+    {% if position %}<p class="role">{{ position }}</p>{% endif %}
+    {% if team %}
+    <p><a href="{{ SITEURL }}/{{ team_link }}/">{{ team }}</a></p>
+    {% endif %}
+    <div class="link-list">
+      {% for key, label in [
+        ("website", "Website"), ("github", "GitHub"), ("scholar", "Scholar"),
+        ("google_scholar", "Google Scholar"), ("linkedin", "LinkedIn"),
+        ("orcid", "ORCID"), ("sfim_profile", "SFIM Profile"), ("science_blog", "Science Blog")
+      ] %}
+        {% if item.get(key) %}<a href="{{ item.get(key) }}">{{ label }}</a>{% endif %}
+      {% endfor %}
+    </div>
+  </aside>
+  <div>
+    <header class="page-header">
+      <h1>{{ title }}</h1>
+      {% if subheading %}<p>{{ subheading }}</p>{% endif %}
+    </header>
+    <div class="prose">{{ content }}</div>
+  </div>
+</article>
+{% endblock %}

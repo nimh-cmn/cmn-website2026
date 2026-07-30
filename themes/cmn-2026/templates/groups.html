@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Groups | {{ SITENAME }}{% endblock %}
+{% block content %}
+<section class="page">
+  <header class="page-header">
+    <h1>Groups</h1>
+    <p>CMN currently highlights three connected groups, each with distinct support and research roles.</p>
+  </header>
+  <div class="group-grid">
+    {% for group in cmn_groups %}
+    <article class="group-card">
+      <p class="eyebrow">{{ group.short_name }}</p>
+      <h2><a href="{{ SITEURL }}{{ group.url }}">{{ group.title }}</a></h2>
+      <p>{{ group.summary|striptags }}</p>
+      {% if group.lead %}<p class="meta">Lead: {{ group.lead }}</p>{% endif %}
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

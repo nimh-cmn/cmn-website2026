@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}
+Recent Posts
+{% endblock %}
+{% block content %}
+<div class="views-element-container">
+    <div
+        class="view view-recent-posts view-id-recent_posts view-display-id-page_1 js-view-dom-id-420cff1ebcb02d4e065081f2ba7453ac61794fe345ffeaa2287a31a71dea70fe">
+
+        <div class="view-content">
+            {% for post in posts_list %}
+            <div class="views-row">
+                <div class="views-field views-field-title"><span class="field-content"><a href="{{SITEURL}}/{{post.slug}}"
+                            hreflang="en">{{post.title}}</a></span></div>
+                <div class="views-field views-field-body">
+                    <div class="field-content">
+                        <p>
+                            {{post.short_description}}
+                        </p>
+                    </div>
+                </div>
+                <div class="views-field views-field-field-team-or-person">
+                    <div class="field-content">
+                        <a href="{{SITEURL}}/people/{{post.host.slug}}" rel="bookmark">{{post.host.title}}{% if post.host.subheading %}
+                            , {{post.host.subheading}} 
+                            {% endif %}</a>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            {% endfor %}
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}

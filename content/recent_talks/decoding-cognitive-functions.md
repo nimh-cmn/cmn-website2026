@@ -1,0 +1,10 @@
+Title: Decoding Cognitive Functions
+Date: 2024-10-19 14:08
+Talk_month: October 2019
+Slug: decoding-cognitive-functions
+Speaker_Slug: 65
+Part_of:[The Machine Learning in Brain Imaging Series](/talks/machine-learning-in-brain-imaging/)
+Links: [View Talk](https://www.youtube.com/watch?v=ms2pmEviZGU&ab_channel=NIMHCenterforMultimodalNeuroimaging)
+Template: talk_detail
+
+Stress and depression are a common affliction in all walks of life. When left unmanaged, stress can inhibit productivity or cause depression. Depression can also occur independently of stress. There has been a sharp rise in mobile health initiatives to monitor stress and depression. However, these initiatives usually require users to install dedicated apps or multiple sensors, making such solutions hard to scale. Moreover, they emphasize sensing individual factors and overlook social interactions, which plays a significant role in influencing stress and depression. In this talk I will describe StressMon, a stress and depression detection system that leverages single-attribute location data, passively sensed from the WiFi infrastructure. Using the location data, it extracts a detailed set of movement, and physical group interaction pattern features, without requiring explicit user actions or software installation on mobile phones. These features are used in two different machine learning models to detect stress and depression. To validate StressMon, we conducted three different longitudinal studies at a university, with different groups of students, totaling up to 108 participants. In these experiments, StressMon detected severely stressed students with a 96% True Positive Rate (TPR), an 80% True Negative Rate (TNR), and a 0.97 area under the ROC curve (AUC) score, using a six-day prediction window. StressMon was also able to detect depression at 91% TPR, 66% TNR, and 0.88 AUC, using a 15-day window.

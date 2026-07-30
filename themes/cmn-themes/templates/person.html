@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+
+{% block subheading %}
+{{subheading}}
+{% endblock %}
+
+{% block content %}
+{% if image %}
+<img loading="lazy" src="{{SITEURL}}/{{static}}/images/{{image}}" alt="{{title}}">
+{% endif %}
+<div class="field field--name-field-job-title field--type-string field--label-visually_hidden">
+    <div class="field__label visually-hidden">Job title</div>
+    <div class="field__item">{{position}}</div>
+</div>
+{% if bio %}
+<div class="clearfix text-formatted field field--name-field-text field--type-text-long field--label-hidden field__item"><p>{{bio}}</p>
+</div>
+{% endif %}
+<div class="field field--name-field-links field--type-link field--label-visually_hidden"></div>
+    <div class="field__label visually-hidden">Links</div>
+    <ul class="field__items">
+          {% if impactstory %}
+          <li class="field__item"><a href="{{impactstory}}">Impactstory</a></li>
+          {% endif %}
+          {% if linkedin %}
+          <li class="field__item"><a href="{{linkedin}}">LinkedIn</a></li>
+          {% endif %}
+          {% if scholar %}
+          <li class="field__item"><a href="{{scholar}}">Scholar</a></li>
+          {% endif %}
+          {% if github %}
+          <li class="field__item"><a href="{{github}}">GitHub</a></li>
+          {% endif %}
+          {% if openalex %}
+          <li class="field__item"><a href="{{openalex}}">OpenAlex</a></li>
+          {% endif %}
+          {% if google_scholar_profile %}
+          <li class="field__item"><a href="{{google_scholar_profile}}">Google Scholar Profile</a></li>
+          {% endif %}
+          {% if website %}
+          <li class="field__item"><a href="{{website}}">Website</a></li>
+          {% endif %}
+          {% if lab_website %}
+          <li class="field__item"><a href="{{lab_website}}">Lab Website</a></li>
+          {% endif %}
+          {% if webpage %}
+          <li class="field__item"><a href="{{webpage}}">Webpage</a></li>
+          {% endif %}
+          {% if open_neuro_pet %}
+          <li class="field__item"><a href="{{open_neuro_pet}}">OpenNeuroPET</a></li>
+          {% endif %}
+          {% if personal_website %}
+          <li class="field__item"><a href="{{personal_website}}">Personal Website</a></li>
+          {% endif %}
+          {% if research_gate_profile %}
+          <li class="field__item"><a href="{{research_gate_profile}}">ResearchGate profile</a></li>
+          {% endif %}
+          {% if impactstory_profile %}
+          <li class="field__item"><a href="{{impactstory_profile}}">Impactstory Profile</a></li>
+          {% endif %}
+          {% if twitter %}
+          <li class="field__item"><a href="{{twitter}}">Twitter</a></li>
+          {% endif %}
+          {% if google_scholar %}
+          <li class="field__item"><a href="{{google_scholar}}">Google Scholar</a></li>
+          {% endif %}
+          {% if slide_share %}
+          <li class="field__item"><a href="{{slide_share}}">SlideShare</a></li>
+          {% endif %}
+          {% if upenn_website %}
+          <li class="field__item"><a href="{{upenn_website}}">UPenn Website</a></li>
+          {% endif %}
+          {% if research_gate %}
+          <li class="field__item"><a href="{{research_gate}}">ResearchGate</a></li>
+          {% endif %}
+          {% if umd_honors_college_profile %}
+          <li class="field__item"><a href="{{umd_honors_college_profile}}">UMD Honors College Profile</a></li>
+          {% endif %}
+          {% if orcid %}  
+          <li class="field__item"><a href="{{orcid}}">ORCID</a></li>
+          {% endif %}
+          {% if science_blog %}
+          <li class="field__item"><a href="{{science_blog}}">Science Blog</a></li>
+          {% endif %}
+          {% if sfim_profile %}
+          <li class="field__item"><a href="{{sfim_profile}}">SFIM Profile</a></li>
+          {% endif %}
+        </ul>
+
+  </div>
+
+  
+  {% if place == 'Member' %}
+  <div class="views-element-container"><section aria-labelledby="teams-eva" class="view view-eva view-teams view-id-teams view-display-id-entity_view_1 js-view-dom-id-ba4b659ce6d62a8061961fe7cc6f3dbdfaeae6d78749665745ae4c25630b16de">
+    <div id="teams-eva">Teams</div>
+        <div class="views-row"><div class="views-field views-field-title"><span class="field-content"><a href="{{SITEURL}}/{{team_link}}" hreflang="en">{{team}}</a></span></div></div>
+  
+  </section>
+  </div>
+  {% endif %}
+{% endblock %}

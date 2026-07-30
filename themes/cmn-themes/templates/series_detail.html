@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}
+{{ article.name }}
+{% endblock %}
+{% block content %}
+{{ article.content }}
+
+<div class="views-element-container">
+    <section aria-labelledby="events-eva" class="view view-eva view-events view-id-events view-display-id-entity_view_2 js-view-dom-id-0b79b08e0b15ad0782492d576678571637dade47e797cd8507a7c34ccfc57e11">
+        <div id="events-eva">Recent Talks</div>
+        <div
+            class="view view-events view-id-events view-display-id-page_1 js-view-dom-id-3e0a5a999ec0b5fe5459fe154808a6823e838588df59a5a988ad9c0790fc0f7d">
+            <div class="view-content">
+                {% for event in series_talks[article.title] %}
+                <div class="event-month">
+                    <div class="event-month-label"><span class="visually-hidden">Events in </span>{{event.talk_month}}
+                    </div>
+                    <article aria-labelledby="node-title-91" class="node node--type-event node--view-mode-teaser">
+                        <h2 id="node-title-91">
+                            <a href="{{SITEURL}}/{{event.slug}}" rel="bookmark"><span
+                                    class="field field--name-title field--type-string field--label-hidden">{{event.title}}</span>
+                            </a>
+                        </h2>
+                        <div class="node__content">
+                            <div
+                                class="field field--name-field-photo field--type-image field--label-hidden field__item">
+                                <img loading="lazy" src="{{SITEURL}}/{{static}}/images/{{event.speaker.image}}"
+                                    width="340" height="340" alt="{{event.speaker.title}}"
+                                    class="image-style-event-teaser">
+                            </div>
+                            <div
+                                class="field field--name-field-team-or-person field--type-entity-reference field--label-hidden field__item">
+                                <div class="node node--type-person node--view-mode-teaser">
+                                    <a href="{{SITEURL}}/people/{{event.speaker.slug}}"
+                                        rel="bookmark">{{event.speaker.title}}{% if event.speaker.subheading %}
+                                        , {{event.speaker.subheading}}
+                                        {% endif %}</a>
+                                </div>
+                                <div class="views-element-container"></div>
+                            </div>
+                            <div class="field field--name-field-link field--type-link field--label-visually_hidden">
+                                <div class="field__label visually-hidden">Links</div>
+                                <ul class="field__items">
+                                    {% for element in event.links %}
+                                    <li class="field__item">
+                                        <a href="{{element[1]}}" hreflang="en">{{element[0]}}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div
+                                class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+                                <p>{{event.content}}</p>
+                            </div>
+                            <div class="field field--name-field-series">Part of
+                                {% for element in event.part_of %}
+                                <a href="{{SITEURL}}{{element[1]}}" hreflang="en">{{element[0]}}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

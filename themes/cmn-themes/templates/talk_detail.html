@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}
+{{ talks_dict[article.slug].title }}
+{% endblock %}
+
+{% block subheading %}
+{{talks_dict[article.slug].talk_month}}
+{% endblock %}
+
+{% block content %}
+
+<article aria-labelledby="page-title" class="node node--type-event node--view-mode-full">
+
+
+
+
+   <div class="node__content">
+
+      <div class="field field--name-field-photo field--type-image field--label-hidden field__item">
+         <img loading="lazy" src="{{SITEURL}}/{{static}}/images/{{talks_dict[article.slug].speaker.image}}" width="340"
+            height="340" alt="{{talks_dict[article.slug].speaker.title}} class=" image-style-event-teaser">
+
+
+      </div>
+
+      <div class="field field--name-field-team-or-person field--type-entity-reference field--label-hidden field__item">
+         <div class="node node--type-person node--view-mode-teaser">
+            <a href="{{SITEURL}}/people/{{talks_dict[article.slug].speaker.slug}}"
+               rel="bookmark">{{talks_dict[article.slug].speaker.title}}{% if
+               talks_dict[article.slug].speaker.subheading %}
+               , {{talks_dict[article.slug].speaker.subheading}}
+               {% endif %}</a>
+         </div>
+         <div class="views-element-container"></div>
+
+      </div>
+
+      <div class="field field--name-field-series">Part of
+         {% for element in talks_dict[article.slug].part_of %}
+         <a href="{{SITEURL}}{{element[1]}}" hreflang="en">{{element[0]}}</a>
+         {% endfor %}
+      </div>
+
+      <div class="field field--name-field-link field--type-link field--label-visually_hidden">
+         <div class="field__label visually-hidden">Links</div>
+         <ul class="field__items">
+            {% for element in talks_dict[article.slug].links %}
+            <li class="field__item">
+               <a href="{{element[1]}}" hreflang="en">{{element[0]}}</a>
+            </li>
+            {% endfor %}
+         </ul>
+      </div>
+
+      {{talks_dict[article.slug].content}}
+
+</article>
+{% endblock %}

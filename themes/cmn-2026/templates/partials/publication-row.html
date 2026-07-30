@@ -1,0 +1,10 @@
+<article class="publication-row">
+  <h5>
+    {% if publication.paper_url %}
+    <a href="{{ publication.paper_url }}">{{ publication.title }}</a>
+    {% else %}
+    <a href="{{ SITEURL }}{{ publication.url }}">{{ publication.title }}</a>
+    {% endif %}
+  </h5>
+  {% if publication.citation %}<p>{{ publication.citation }}</p>{% endif %}
+</article>

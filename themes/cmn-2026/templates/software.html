@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Tools / Software | {{ SITENAME }}{% endblock %}
+{% block content %}
+<section class="page">
+  <header class="page-header">
+    <h1>Tools / Software</h1>
+    <p>Software and reusable tools from CMN groups.</p>
+  </header>
+  <div class="software-grid">
+    {% for tool in software %}
+    {% include "partials/software-card.html" %}
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

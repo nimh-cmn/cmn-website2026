@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} | {{ SITENAME }}{% endblock %}
+{% block content %}
+<article class="page">
+  <header class="page-header">
+    <p class="eyebrow">Publication{% if group_abbreviation %} / {{ group_abbreviation }}{% endif %}</p>
+    <h1>{{ title }}</h1>
+    {% if citation %}<p>{{ citation }}</p>{% endif %}
+    {% if venue %}<p class="meta">{{ venue }}</p>{% endif %}
+  </header>
+  <div class="prose">{{ content }}</div>
+  <div class="link-list">
+    {% if doi %}<a href="https://doi.org/{{ doi }}">DOI</a>{% endif %}
+    {% if paper_url %}<a href="{{ paper_url }}">Paper</a>{% endif %}
+    {% if data_url %}<a href="{{ data_url }}">Data</a>{% endif %}
+    {% if code_url %}<a href="{{ code_url }}">Code</a>{% endif %}
+  </div>
+</article>
+{% endblock %}

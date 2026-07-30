@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}
+Teams
+{% endblock %}
+{% block content %}
+<div class="views-element-container">
+   <div class="view view-teams-page view-id-teams_page view-display-id-page_1 js-view-dom-id-c028f2785f121e83bd75535a3f18ca1b6cbd8e8f8cd15a5af68fe98fcf0445d3">
+      <div class="view-content">
+         <div class="views-row">
+            <div class="views-field views-field-rendered-entity">
+               <span class="field-content">
+                  <article aria-labelledby="node-title-10" class="node node--type-team node--view-mode-teaser">
+                     <h2 id="node-title-10">
+                        <a href="{{SITEURL}}/dsst" rel="bookmark"><span class="field field--name-title field--type-string field--label-hidden">Data Science and Sharing Team</span>
+                        </a>
+                     </h2>
+                     <div class="node__content">
+                        <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+                           <p>The Data Science and Sharing Team supports investigators within the NIMH intramural program in creating, distributing, and leveraging large, open datasets to accelerate discovery. We provide tools and training to help the IRP embrace open science and stay on the cutting edge of novel datasets, tools, and platforms.&nbsp;</p>
+                        </div>
+                     </div>
+                  </article>
+               </span>
+            </div>
+         </div>
+         <div class="views-row">
+            <div class="views-field views-field-rendered-entity">
+               <span class="field-content">
+                  <article aria-labelledby="node-title-14" class="node node--type-team node--view-mode-teaser">
+                     <h2 id="node-title-14">
+                        <a href="{{SITEURL}}/mlt" rel="bookmark"><span class="field field--name-title field--type-string field--label-hidden">Machine Learning Core</span>
+                        </a>
+                     </h2>
+                     <div class="node__content">
+                        <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+                           <p>The Machine Learning Core supports researchers in the NIMH intramural research program who want to address research problems in clinical and cognitive neuroscience using machine learning approaches.&nbsp;</p>
+                        </div>
+                     </div>
+                  </article>
+               </span>
+            </div>
+         </div>
+      </div>
+      <div class="view-footer">
+         <div class="view view-people view-id-people view-display-id-page_1 js-view-dom-id-39e4df416c7474082002072479b51f6ac8ebe4e1e30c65976320cf06c51aaec2">
+            
+         
+             <div class="view-header">
+               <h2>Alumni</h2>
+            </div>
+             <div class="view-content">
+             {% for person in people %}
+             {% if person.employee_status == "Alumni" %}
+             <div class="views-row">
+                 <div class="views-field views-field-rendered-entity">
+                     <span class="field-content">
+                         <div class="node node--type-person node--view-mode-teaser">
+                         <a href="{{SITEURL}}/people/{{person.slug}}" rel="bookmark">{{person.title}}{% if person.subheading %}
+                         , {{person.subheading}} 
+                         {% endif %} </a>
+                         </div>
+                         {% if person.place == 'Member' %}
+                             <div class="views-element-container">
+                                     <section class="view view-eva view-teams view-id-teams view-display-id-entity_view_2 js-view-dom-id-3d5c95671b03b88f26b5c7f9df871c3a878b633fcc9874eaf2997fa4a62bcb14">
+                                         <div class="views-row">
+                                             <div class="views-field views-field-title">
+                                                 <span class="field-content">
+                                                     <a href="{{SITEURL}}/{{person.team_link}}" hreflang="en">{{person.team}}</a>
+                                                 </span>
+                                             </div>
+                                         </div>
+                                     </section>
+                                 </div>
+                             {% else %}
+                                 <div class="views-element-container"></div>
+                         {% endif %}
+                     </span>
+                 </div>
+             </div>
+             {% endif %}
+             {% endfor %}
+             </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

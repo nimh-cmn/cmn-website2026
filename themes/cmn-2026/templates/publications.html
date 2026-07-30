@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Publications | {{ SITENAME }}{% endblock %}
+{% block content %}
+<section class="page">
+  <header class="page-header">
+    <h1>Publications</h1>
+    <p>Publication entries are Markdown files so papers can be added one at a time.</p>
+  </header>
+  {% if publication_years %}
+  <nav class="year-jump" aria-label="Publication years">
+    {% for year in publication_years %}
+    <a href="#year-{{ year }}">{{ year }}</a>
+    {% endfor %}
+  </nav>
+  {% endif %}
+  <div class="publication-index-list">
+    {% set ns = namespace(current_year="") %}
+    {% for publication in publications %}
+    {% set year = publication.date.strftime("%Y") if publication.date else "" %}
+    {% if year and year != ns.current_year %}
+    <h2 id="year-{{ year }}" class="publication-year">{{ year }}</h2>
+    {% set ns.current_year = year %}
+    {% endif %}
+    <article class="publication-card">
+      <p class="meta">{{ publication.group_abbreviation or "" }}{% if publication.group_abbreviation and year %} / {% endif %}{{ year }}</p>
+      <h2><a href="{{ SITEURL }}{{ publication.url }}">{{ publication.title }}</a></h2>
+      {% if publication.citation %}<p>{{ publication.citation }}</p>{% endif %}
+      {% if publication.venue %}<p class="meta">{{ publication.venue }}</p>{% endif %}
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

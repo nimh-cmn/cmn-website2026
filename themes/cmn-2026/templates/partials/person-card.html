@@ -1,0 +1,10 @@
+<article class="person-card">
+  <a href="{{ SITEURL }}{{ person.url }}">
+    {% if person.image %}
+    <img src="{{ SITEURL }}/images/{{ person.image }}" alt="">
+    {% endif %}
+    <span>{{ person.title }}</span>
+  </a>
+  {% if person.position %}<p>{{ person.position }}</p>{% endif %}
+  {% if person.team and not hide_person_group|default(false) %}<small>{{ person.team }}</small>{% endif %}
+</article>
