@@ -30,12 +30,6 @@ with `TypeError: expected str, bytes or os.PathLike object, not NoneType`.
 make serve
 ```
 
-Equivalent direct command:
-
-```bash
-/Users/molfesepj/micromamba/envs/mne/bin/pelican content -s pelicanconf.py -r -l
-```
-
 Then open `http://127.0.0.1:8000`.
 
 ## Front-Page Collaborator Image
