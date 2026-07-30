@@ -156,6 +156,28 @@ def _series_slug(label):
     return slug
 
 
+def _slugify(value):
+    return re.sub(r"[^a-z0-9]+", "-", str(value).lower()).strip("-")
+
+
+def _person_slug(metadata, path):
+    title = str(metadata.get("title") or path.stem).strip()
+    fallback = _slugify(path.stem)
+    return _slugify(title) or fallback
+
+
+def _is_former_person(person):
+    status = str(person.get("employee_status", "")).strip().lower()
+    place = str(person.get("place", "")).strip().lower()
+    return status == "alumni" or place == "former team members"
+
+
+def _people_status(person):
+    if _is_former_person(person):
+        return "Alumni"
+    return str(person.get("employee_status", "")).strip()
+
+
 def _read_collection(generator, collection_name, spec):
     source_dir = Path(generator.settings["PATH"]) / spec["dir"]
     reader = MarkdownReader(generator.settings)
@@ -166,7 +188,8 @@ def _read_collection(generator, collection_name, spec):
 
     for path in sorted(source_dir.glob("*.md")):
         content, metadata = reader.read(str(path))
-        slug = str(metadata.get("slug") or path.stem).strip("/")
+        raw_slug = str(metadata.get("slug") or path.stem).strip("/")
+        slug = _person_slug(metadata, path) if collection_name == "people" else raw_slug
         output_save_as = spec["url"].format(slug=slug)
         item_url = "/" + output_save_as.removesuffix("index.html")
         item = {
@@ -176,6 +199,10 @@ def _read_collection(generator, collection_name, spec):
             "collection": collection_name,
             "url": item_url,
         }
+        if collection_name == "people" and raw_slug != slug:
+            item["legacy_slug"] = raw_slug
+        if collection_name == "people":
+            item["people_status"] = _people_status(item)
         if collection_name == "groups" and metadata.get("legacy_slug"):
             item["url"] = f"/{metadata['legacy_slug']}/"
         item["links"] = _parse_links(metadata.get("links"))
@@ -223,7 +250,11 @@ def build_collections(generator):
     for name, spec in COLLECTIONS.items():
         collections[name] = _read_collection(generator, name, spec)
 
-    people_by_slug = {str(person.get("slug")): person for person in collections["people"]}
+    people_by_slug = {}
+    for person in collections["people"]:
+        for key in (person.get("slug"), person.get("legacy_slug")):
+            if key:
+                people_by_slug[str(key)] = person
     groups_by_slug = {str(group.get("slug")): group for group in collections["groups"]}
     groups_by_key = {}
     for group in collections["groups"]:
@@ -238,7 +269,7 @@ def build_collections(generator):
             for person in collections["people"]
             if person.get("team_link") in aliases
             and person.get("place") == "Member"
-            and person.get("employee_status", "").lower() != "alumni"
+            and person.get("people_status") == "Active"
         ]
         group["people"].sort(
             key=lambda person: (
@@ -250,7 +281,7 @@ def build_collections(generator):
             person
             for person in collections["people"]
             if person.get("team_link") in aliases
-            and person.get("place") == "Former Team Members"
+            and _is_former_person(person)
         ]
         group["former_people"].sort(key=_person_sort_key)
         group["projects"] = [
@@ -323,7 +354,7 @@ def build_collections(generator):
             1
             for person in collections["people"]
             if person.get("team_link") in aliases
-            and person.get("employee_status") in {"Active", "Alumni"}
+            and person.get("people_status") in {"Active", "Alumni"}
         )
         if count:
             people_filter_groups.append(

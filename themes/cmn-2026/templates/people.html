@@ -8,7 +8,7 @@
   </header>
   <div class="filter-tabs" role="tablist" aria-label="Filter people by team or core">
     <button class="filter-tab is-active" type="button" data-people-filter="all">
-      All <span>{{ people|selectattr("employee_status", "in", ["Active", "Alumni"])|list|length }}</span>
+      All <span>{{ people|selectattr("people_status", "in", ["Active", "Alumni"])|list|length }}</span>
     </button>
     {% for group in people_filter_groups %}
     <button class="filter-tab" type="button" data-people-filter="{{ group.slug }}">
@@ -18,9 +18,9 @@
   </div>
   {% for status in ["Active", "Alumni"] %}
   <section class="subsection people-filter-section">
-    <h2>{{ "Members" if status == "Active" else status }}</h2>
+    <h2>{{ "Members" if status == "Active" else "Former Team Members" }}</h2>
     <div class="people-grid">
-      {% for person in people if person.employee_status == status %}
+      {% for person in people if person.people_status == status %}
       <div class="people-filter-item" data-people-team="{{ person.team_link }}">
       {% include "partials/person-card.html" %}
       </div>
