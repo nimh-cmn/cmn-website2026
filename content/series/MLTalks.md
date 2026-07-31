@@ -1,6 +1,6 @@
 Title: Machine Learning in Brain Imaging Series
 Slug: machine-learning-in-brain-imaging
-Group: mlt
+Group: mlc
 Name: The Machine Learning in Brain Imaging Series
 Template: series_detail
 Date: 2024-10-24 10:21

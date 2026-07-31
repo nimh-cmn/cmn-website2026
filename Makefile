@@ -1,5 +1,5 @@
-PYTHON ?= /Users/molfesepj/micromamba/envs/mne/bin/python
-PELICAN ?= /Users/molfesepj/micromamba/envs/mne/bin/pelican
+PYTHON ?= /Users/molfesepj/miniconda3/envs/mne/bin/python
+PELICAN ?= /Users/molfesepj/miniconda3/envs/mne/bin/pelican
 PELICANOPTS ?=
 
 BASEDIR := $(CURDIR)

@@ -15,4 +15,4 @@ CMN duties include:
 - Supporting sharing of resources, tools, references, and data.
 - Maintaining a central clearinghouse for talks, workshops, methods, and available support.
 
-Collaborating groups include the Functional MRI Core Facility, Data Science and Sharing Team, Machine Learning Team, Scientific and Statistical Computing Core, Neurophysiology Imaging Core, MEG Core, Section on Magnetic Resonance Spectroscopy, and Section on PET Neuroimaging Sciences.
+Collaborating groups include the Functional MRI Core Facility, Data Science and Sharing Team, Machine Learning Core, Scientific and Statistical Computing Core, Neurophysiology Imaging Core, MEG Core, Section on Magnetic Resonance Spectroscopy, and Section on PET Neuroimaging Sciences.

@@ -1,6 +1,6 @@
 Title: Fast Functional GEE
 Slug: fast-fgee
-Group: mlt
+Group: mlc
 External_url: https://github.com/gloewing/fastFGEE
 Summary: One-step functional GEE algorithm for longitudinal functional regression.
 Maintainer: Gabriel Loewinger

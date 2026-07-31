@@ -4,7 +4,7 @@ Pelican site for the Center for Multimodal Neuroimaging.
 
 The site keeps the legacy CMN content but reorganizes it around simple Markdown collections inspired by the SFIM site:
 
-- `content/groups`: CMN, Machine Learning Team, and Data Science and Sharing Team.
+- `content/groups`: CMN, Machine Learning Core, and Data Science and Sharing Team.
 - `content/people`: one Markdown file per person, copied from the legacy site.
 - `content/projects`: one Markdown file per project.
 - `content/publications`: one Markdown file per publication.
@@ -54,7 +54,7 @@ Slug: example-paper-title
 Date: 2026-01-01
 Citation: First Author; Second Author.
 Venue: Journal or conference
-Group: mlt
+Group: mlc
 Publication_type: methods
 DOI: 10.0000/example
 Paper_url: https://example.org/paper
@@ -64,7 +64,7 @@ Code_url: https://github.com/example/repo
 Abstract or notes go here.
 ```
 
-For Machine Learning Team publications, use:
+For Machine Learning Core publications, use:
 
 - `Publication_type: preprint`
 - `Publication_type: methods`

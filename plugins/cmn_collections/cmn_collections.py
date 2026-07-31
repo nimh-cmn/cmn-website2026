@@ -255,7 +255,6 @@ def build_collections(generator):
         for key in (person.get("slug"), person.get("legacy_slug")):
             if key:
                 people_by_slug[str(key)] = person
-    groups_by_slug = {str(group.get("slug")): group for group in collections["groups"]}
     groups_by_key = {}
     for group in collections["groups"]:
         for key in (group.get("slug"), group.get("legacy_slug")):
@@ -345,7 +344,7 @@ def build_collections(generator):
         }
 
     for person in collections["people"]:
-        person["group"] = groups_by_slug.get(str(person.get("team_link")))
+        person["group"] = groups_by_key.get(str(person.get("team_link")))
 
     people_filter_groups = []
     for group in collections["groups"]:

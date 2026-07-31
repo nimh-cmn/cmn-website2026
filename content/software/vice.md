@@ -1,6 +1,6 @@
 Title: VICE
 Slug: vice
-Group: mlt
+Group: mlc
 External_url: https://github.com/LukasMut/VICE
 Summary: Toolbox for creating interpretable item embeddings from odd-one-out triplet task judgments.
 Maintainer: Lukas Muttenthaler
