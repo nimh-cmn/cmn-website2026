@@ -39,6 +39,7 @@ COLLECTIONS = {
 
 
 LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+ROOT_RELATIVE_ATTR_RE = re.compile(r'(?P<attr>\b(?:href|src)=["\'])(?P<path>/(?!/)[^"\']*)')
 
 
 def _as_list(value):
@@ -55,6 +56,18 @@ def _parse_links(value):
         for label, href in LINK_RE.findall(str(raw)):
             links.append({"label": label.strip(), "href": href.strip()})
     return links
+
+
+def _prefix_root_relative_attrs(content, siteurl):
+    if not siteurl:
+        return content
+
+    siteurl = str(siteurl).rstrip("/")
+
+    def replace(match):
+        return f"{match.group('attr')}{siteurl}{match.group('path')}"
+
+    return ROOT_RELATIVE_ATTR_RE.sub(replace, content)
 
 
 def _speaker_value(values, index):
@@ -188,6 +201,7 @@ def _read_collection(generator, collection_name, spec):
 
     for path in sorted(source_dir.glob("*.md")):
         content, metadata = reader.read(str(path))
+        content = _prefix_root_relative_attrs(content, generator.settings.get("SITEURL", ""))
         raw_slug = str(metadata.get("slug") or path.stem).strip("/")
         slug = _person_slug(metadata, path) if collection_name == "people" else raw_slug
         output_save_as = spec["url"].format(slug=slug)
