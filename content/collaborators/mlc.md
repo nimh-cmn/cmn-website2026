@@ -3,7 +3,7 @@ Slug: mlc
 Short_name: MLC
 Lead: Francisco Pereira
 External_url: /mlc/
-Icon: MLT_cropped.png
+Icon: MLC_mark.png
 Summary: Statistics and machine learning support and methods development for NIMH investigators.
 Weight: 3
 
