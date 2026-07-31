@@ -376,6 +376,14 @@ img {
   gap: 1rem;
 }
 
+.people-grid {
+  --person-card-max-size: 351px;
+}
+
+.people-filter-item {
+  display: flex;
+}
+
 .prose table {
   display: block;
   width: 100%;
@@ -498,6 +506,11 @@ img {
 
 .person-card {
   padding: 1rem;
+}
+
+.people-grid .person-card {
+  width: 100%;
+  min-height: var(--person-card-max-size);
 }
 
 .person-card a {
