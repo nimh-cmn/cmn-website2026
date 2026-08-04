@@ -20,6 +20,7 @@ SETTINGS.update(LOCAL_SETTINGS)
 CONFIG = {
     "settings_base": SETTINGS_FILE_BASE,
     "settings_publish": "publishconf.py",
+    "content_path": SETTINGS["PATH"],
     # Output path. Can be absolute or relative to tasks.py. Default: 'output'
     "deploy_path": SETTINGS["OUTPUT_PATH"],
     # Github Pages configuration
@@ -154,5 +155,6 @@ def gh_pages(c):
     )
 
 def pelican_run(cmd):
+    cmd = "{content_path} ".format(**CONFIG) + cmd
     cmd += " " + program.core.remainder  # allows to pass-through args to pelican
     pelican_main(shlex.split(cmd))

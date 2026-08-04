@@ -1,5 +1,5 @@
 Title: Sebastian Bruch
-Position: Senior Research Scientist at Northeastern University
+Position: Sr. Research Scientist, Northeastern University
 Image: people/mlc/sebastian-bruch.png
 Google_Scholar: https://scholar.google.com/citations?user=aAWYKCcAAAAJ&hl=en&oi=ao
 Slug: 78

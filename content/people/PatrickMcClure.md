@@ -1,5 +1,5 @@
 Title: Patrick McClure
-Position: Assistant Professor, Computer Science Dept., Naval Postgraduate School
+Position: Assistant Professor, Naval Postgraduate School
 Image: people/mlc/patrick-mcclure.jpg
 Google_Scholar_profile: https://scholar.google.com/citations?user=8TKyUl4AAAAJ&hl=en&oi=ao
 Slug: 13

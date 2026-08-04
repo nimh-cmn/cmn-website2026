@@ -377,7 +377,7 @@ img {
 }
 
 .people-grid {
-  --person-card-max-size: 351px;
+  --person-card-max-size: 260px;
 }
 
 .people-filter-item {

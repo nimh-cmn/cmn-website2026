@@ -14,7 +14,7 @@ COLLECTIONS = {
     "publications": {
         "dir": "publications",
         "template": "publication",
-        "url": "publications/{slug}/index.html",
+        "url": "publications/{slug}.html",
     },
     "talks": {"dir": "recent_talks", "template": "talk", "url": "talks/{slug}/index.html"},
     "posts": {"dir": "workshops", "template": "post", "url": "posts/{slug}/index.html"},
