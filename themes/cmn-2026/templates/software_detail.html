@@ -8,8 +8,11 @@
     {% if summary %}<p>{{ summary|striptags }}</p>{% endif %}
   </header>
   <div class="prose">{{ content }}</div>
-  {% if external_url %}
-  <p><a class="button" href="{{ external_url }}">GitHub</a></p>
+  {% if external_url or tutorial %}
+  <p>
+    {% if external_url %}<a class="button" href="{{ external_url }}">GitHub</a>{% endif %}
+    {% if tutorial %}<a class="button button-outline" href="{{ tutorial }}">Tutorial</a>{% endif %}
+  </p>
   {% endif %}
 </article>
 {% endblock %}

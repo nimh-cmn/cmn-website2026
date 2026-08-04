@@ -395,6 +395,14 @@ img {
   line-height: 1.4;
 }
 
+.prose img {
+  display: block;
+  margin: 1.25rem 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--ink);
+}
+
 .prose th,
 .prose td {
   padding: 0.6rem 0.7rem;

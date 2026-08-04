@@ -4,7 +4,13 @@
     <a href="{{ SITEURL }}{{ tool.url }}">{{ tool.title }}</a>
   </h3>
   {% if tool.summary %}<p>{{ tool.summary|striptags }}</p>{% endif %}
-  {% if tool.external_url %}<p class="meta"><a href="{{ tool.external_url }}">GitHub</a></p>{% endif %}
+  {% if tool.external_url or tool.tutorial %}
+  <p class="meta">
+    {% if tool.external_url %}<a href="{{ tool.external_url }}">GitHub</a>{% endif %}
+    {% if tool.external_url and tool.tutorial %} / {% endif %}
+    {% if tool.tutorial %}<a href="{{ tool.tutorial }}">Tutorial</a>{% endif %}
+  </p>
+  {% endif %}
   {% if tool.maintainer %}
   <p class="meta">
     Maintainer:
