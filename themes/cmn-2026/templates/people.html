@@ -21,7 +21,7 @@
     <h2>{{ "Members" if status == "Active" else "Former Team Members" }}</h2>
     <div class="people-grid">
       {% for person in people if person.people_status == status %}
-      <div class="people-filter-item" data-people-team="{{ person.team_link }}">
+      <div class="people-filter-item" data-people-team="{{ person.people_filter_slug }}">
       {% include "partials/person-card.html" %}
       </div>
       {% endfor %}
@@ -37,10 +37,14 @@
         tab.classList.toggle('is-active', tab === button);
       });
       document.querySelectorAll('.people-filter-item').forEach((item) => {
-        item.hidden = filter !== 'all' && item.dataset.peopleTeam !== filter;
+        const isHidden = filter !== 'all' && item.dataset.peopleTeam !== filter;
+        item.hidden = isHidden;
+        item.style.display = isHidden ? 'none' : '';
       });
       document.querySelectorAll('.people-filter-section').forEach((section) => {
-        section.hidden = !section.querySelector('.people-filter-item:not([hidden])');
+        const isHidden = !section.querySelector('.people-filter-item:not([hidden])');
+        section.hidden = isHidden;
+        section.style.display = isHidden ? 'none' : '';
       });
     });
   });

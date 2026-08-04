@@ -191,6 +191,31 @@ def _people_status(person):
     return str(person.get("employee_status", "")).strip()
 
 
+def _group_filter_slug(group):
+    return group.get("legacy_slug") or group.get("slug")
+
+
+def _metadata_int(value, default):
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _people_directory_sort_key(person):
+    status_order = {"Active": 0, "Alumni": 1}
+    group = person.get("group") or {}
+    group_slug = _group_filter_slug(group) if group else person.get("team_link", "")
+
+    return (
+        status_order.get(person.get("people_status"), 2),
+        _metadata_int(group.get("weight"), 99),
+        str(group_slug).lower(),
+        _metadata_int(person.get("sort_order"), 50),
+        _person_sort_key(person),
+    )
+
+
 def _read_collection(generator, collection_name, spec):
     source_dir = Path(generator.settings["PATH"]) / spec["dir"]
     reader = MarkdownReader(generator.settings)
@@ -358,7 +383,12 @@ def build_collections(generator):
         }
 
     for person in collections["people"]:
-        person["group"] = groups_by_key.get(str(person.get("team_link")))
+        group = groups_by_key.get(str(person.get("team_link")))
+        person["group"] = group
+        person["people_filter_slug"] = (
+            _group_filter_slug(group) if group else person.get("team_link") or ""
+        )
+    collections["people"].sort(key=_people_directory_sort_key)
 
     people_filter_groups = []
     for group in collections["groups"]:
@@ -372,7 +402,7 @@ def build_collections(generator):
         if count:
             people_filter_groups.append(
                 {
-                    "slug": group.get("legacy_slug") or group.get("slug"),
+                    "slug": _group_filter_slug(group),
                     "label": group.get("short_name") or group.get("title"),
                     "count": count,
                 }
