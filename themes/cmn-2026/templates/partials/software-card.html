@@ -1,12 +1,18 @@
 <article class="software-card">
-  <p class="eyebrow">{{ tool.group|upper }}</p>
+  <p class="eyebrow">{{ tool.group_abbreviation or tool.group|upper }}</p>
   <h3>
-    {% if tool.external_url %}
-    <a href="{{ tool.external_url }}">{{ tool.title }}</a>
-    {% else %}
     <a href="{{ SITEURL }}{{ tool.url }}">{{ tool.title }}</a>
-    {% endif %}
   </h3>
   {% if tool.summary %}<p>{{ tool.summary|striptags }}</p>{% endif %}
-  {% if tool.maintainer %}<p class="meta">Maintainer: {{ tool.maintainer }}</p>{% endif %}
+  {% if tool.external_url %}<p class="meta"><a href="{{ tool.external_url }}">GitHub</a></p>{% endif %}
+  {% if tool.maintainer %}
+  <p class="meta">
+    Maintainer:
+    {% if tool.maintainer_person %}
+    <a href="{{ SITEURL }}{{ tool.maintainer_person.url }}">{{ tool.maintainer }}</a>
+    {% else %}
+    {{ tool.maintainer }}
+    {% endif %}
+  </p>
+  {% endif %}
 </article>

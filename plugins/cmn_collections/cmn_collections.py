@@ -290,10 +290,14 @@ def build_collections(generator):
         collections[name] = _read_collection(generator, name, spec)
 
     people_by_slug = {}
+    people_by_title = {}
     for person in collections["people"]:
         for key in (person.get("slug"), person.get("legacy_slug")):
             if key:
                 people_by_slug[str(key)] = person
+        title = str(person.get("title", "")).strip().lower()
+        if title:
+            people_by_title[title] = person
     groups_by_key = {}
     for group in collections["groups"]:
         for key in (group.get("slug"), group.get("legacy_slug")):
@@ -390,6 +394,20 @@ def build_collections(generator):
         )
     collections["people"].sort(key=_people_directory_sort_key)
 
+    for tool in collections["software"]:
+        group = groups_by_key.get(str(tool.get("group")))
+        tool["group_info"] = group
+        tool["group_abbreviation"] = (
+            group.get("short_name", tool.get("group", ""))
+            if group
+            else str(tool.get("group", "")).upper()
+        )
+        tool["software_filter_slug"] = (
+            _group_filter_slug(group) if group else tool.get("group") or ""
+        )
+        maintainer = str(tool.get("maintainer", "")).strip().lower()
+        tool["maintainer_person"] = people_by_title.get(maintainer)
+
     people_filter_groups = []
     for group in collections["groups"]:
         aliases = {key for key in (group.get("slug"), group.get("legacy_slug")) if key}
@@ -407,6 +425,18 @@ def build_collections(generator):
                     "count": count,
                 }
             )
+
+    software_filter_groups = []
+    for group in collections["groups"]:
+        aliases = {key for key in (group.get("slug"), group.get("legacy_slug")) if key}
+        count = sum(1 for tool in collections["software"] if tool.get("group") in aliases)
+        software_filter_groups.append(
+            {
+                "slug": _group_filter_slug(group),
+                "label": group.get("short_name") or group.get("title"),
+                "count": count,
+            }
+        )
 
     for publication in collections["publications"]:
         publication["group_info"] = groups_by_key.get(str(publication.get("group", "")))
@@ -463,6 +493,7 @@ def build_collections(generator):
             "resources": collections["resources"],
             "collaborators": collections["collaborators"],
             "software": collections["software"],
+            "software_filter_groups": software_filter_groups,
             "datasets": collections["datasets"],
             "dataset_status_counts": dataset_status_counts,
             "SITEURL": generator.settings.get("SITEURL", ""),

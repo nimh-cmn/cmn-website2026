@@ -6,10 +6,37 @@
     <h1>Tools / Software</h1>
     <p>Software and reusable tools from CMN groups.</p>
   </header>
+  <div class="filter-tabs" role="tablist" aria-label="Filter software by group">
+    <button class="filter-tab is-active" type="button" data-software-filter="all">
+      All <span>{{ software|length }}</span>
+    </button>
+    {% for group in software_filter_groups %}
+    <button class="filter-tab" type="button" data-software-filter="{{ group.slug }}">
+      {{ group.label }} <span>{{ group.count }}</span>
+    </button>
+    {% endfor %}
+  </div>
   <div class="software-grid">
     {% for tool in software %}
+    <div class="software-filter-item" data-software-group="{{ tool.software_filter_slug }}">
     {% include "partials/software-card.html" %}
+    </div>
     {% endfor %}
   </div>
 </section>
+<script>
+  document.querySelectorAll('[data-software-filter]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const filter = button.dataset.softwareFilter;
+      document.querySelectorAll('[data-software-filter]').forEach((tab) => {
+        tab.classList.toggle('is-active', tab === button);
+      });
+      document.querySelectorAll('.software-filter-item').forEach((item) => {
+        const isHidden = filter !== 'all' && item.dataset.softwareGroup !== filter;
+        item.hidden = isHidden;
+        item.style.display = isHidden ? 'none' : '';
+      });
+    });
+  });
+</script>
 {% endblock %}
