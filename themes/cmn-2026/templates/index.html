@@ -105,12 +105,114 @@
 <section class="section">
   <div class="section-heading">
     <h2>Tools / Software</h2>
-    <a class="text-link" href="{{ SITEURL }}/software/">View all tools</a>
+    <div class="software-rotator-actions">
+      <span class="software-rotator-status">
+        <span class="software-rotator-clock" data-software-countdown aria-hidden="true"></span>
+        <span class="visually-hidden">Next software set in <span data-software-countdown-text>8</span> seconds</span>
+      </span>
+      <a class="text-link" href="{{ SITEURL }}/software/">View all tools</a>
+    </div>
   </div>
-  <div class="software-grid">
-    {% for tool in software[:8] %}
+  <div class="software-grid" data-software-rotator>
+    {% for tool in software %}
+    <div class="home-software-item" data-home-software-item>
     {% include "partials/software-card.html" %}
+    </div>
     {% endfor %}
   </div>
 </section>
+<script>
+  (() => {
+    const grid = document.querySelector('[data-software-rotator]');
+    const countdownClock = document.querySelector('[data-software-countdown]');
+    const countdownText = document.querySelector('[data-software-countdown-text]');
+    if (!grid || !countdownClock || !countdownText) {
+      return;
+    }
+
+    const items = Array.from(grid.querySelectorAll('[data-home-software-item]'));
+    const pageSize = 4;
+    const intervalSeconds = 8;
+    const intervalMs = intervalSeconds * 1000;
+    const transitionMs = 420;
+    if (items.length <= pageSize) {
+      countdownClock.closest('.software-rotator-status')?.setAttribute('hidden', '');
+      countdownText.textContent = String(intervalSeconds);
+      return;
+    }
+
+    const order = items.map((_, index) => index);
+    for (let index = order.length - 1; index > 0; index -= 1) {
+      const swapIndex = Math.floor(Math.random() * (index + 1));
+      [order[index], order[swapIndex]] = [order[swapIndex], order[index]];
+    }
+
+    let start = 0;
+    let cycleStartedAt = window.performance.now();
+    let isTransitioning = false;
+
+    const visibleIndexes = () => {
+      const visible = new Set();
+      for (let offset = 0; offset < pageSize; offset += 1) {
+        visible.add(order[(start + offset) % order.length]);
+      }
+      return visible;
+    };
+
+    const showSet = (entering = false) => {
+      const visible = visibleIndexes();
+      items.forEach((item, index) => {
+        const isHidden = !visible.has(index);
+        item.hidden = isHidden;
+        item.style.display = isHidden ? 'none' : '';
+        item.classList.toggle('is-entering', entering && !isHidden);
+        item.classList.toggle('is-exiting', false);
+      });
+      if (entering) {
+        window.requestAnimationFrame(() => {
+          items.forEach((item) => item.classList.remove('is-entering'));
+        });
+      }
+    };
+
+    const advance = () => {
+      if (isTransitioning) {
+        return;
+      }
+      isTransitioning = true;
+      items.forEach((item) => {
+        if (!item.hidden) {
+          item.classList.add('is-exiting');
+        }
+      });
+      window.setTimeout(() => {
+        start = (start + pageSize) % order.length;
+        cycleStartedAt = window.performance.now();
+        countdownClock.style.setProperty('--progress', '1');
+        countdownText.textContent = String(intervalSeconds);
+        showSet(true);
+        isTransitioning = false;
+      }, transitionMs);
+    };
+
+    showSet();
+    countdownClock.style.setProperty('--progress', '1');
+    countdownText.textContent = String(intervalSeconds);
+
+    const tick = (now) => {
+      const elapsed = now - cycleStartedAt;
+      if (elapsed >= intervalMs) {
+        advance();
+      }
+      const currentElapsed = window.performance.now() - cycleStartedAt;
+      const progress = Math.max(0, 1 - currentElapsed / intervalMs);
+      const remaining = Math.max(1, Math.ceil((intervalMs - currentElapsed) / 1000));
+      countdownClock.style.setProperty('--progress', String(progress));
+      countdownText.textContent = String(remaining);
+      window.requestAnimationFrame(tick);
+    };
+
+    window.requestAnimationFrame(tick);
+  })();
+</script>
 {% endblock %}
