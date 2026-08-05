@@ -1,4 +1,6 @@
 import datetime as dt
+import html
+import json
 import os
 import re
 from pathlib import Path
@@ -40,6 +42,8 @@ COLLECTIONS = {
 
 LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
 ROOT_RELATIVE_ATTR_RE = re.compile(r'(?P<attr>\b(?:href|src)=["\'])(?P<path>/(?!/)[^"\']*)')
+TAG_RE = re.compile(r"<[^>]+>")
+WHITESPACE_RE = re.compile(r"\s+")
 
 
 def _as_list(value):
@@ -173,6 +177,20 @@ def _slugify(value):
     return re.sub(r"[^a-z0-9]+", "-", str(value).lower()).strip("-")
 
 
+def _plain_text(value):
+    text = TAG_RE.sub(" ", str(value or ""))
+    text = re.sub(r"&nbsp;?", " ", text)
+    text = html.unescape(text)
+    return WHITESPACE_RE.sub(" ", text).strip()
+
+
+def _excerpt(value, length=180):
+    text = _plain_text(value)
+    if len(text) <= length:
+        return text
+    return text[:length].rsplit(" ", 1)[0].rstrip(",.;:") + "..."
+
+
 def _person_slug(metadata, path):
     title = str(metadata.get("title") or path.stem).strip()
     fallback = _slugify(path.stem)
@@ -282,6 +300,92 @@ def _write_page(generator, template_name, output_save_as, context):
     template = generator.get_template(template_name)
     with open(output_path, "w", encoding="utf-8") as handle:
         handle.write(template.render(context))
+
+
+def _search_record(title, url, section, content="", summary=""):
+    title = _plain_text(title)
+    if not title or not url:
+        return None
+    text = _plain_text(" ".join([title, summary, content]))
+    return {
+        "title": title,
+        "url": url,
+        "section": section,
+        "summary": _excerpt(summary or content),
+        "text": text,
+    }
+
+
+def _build_search_index(generator, collections):
+    records = []
+    page_dir = Path(generator.settings["PATH"]) / "pages"
+    reader = MarkdownReader(generator.settings)
+
+    if page_dir.exists():
+        for path in sorted(page_dir.glob("*.md")):
+            content, metadata = reader.read(str(path))
+            slug = str(metadata.get("slug") or path.stem).strip("/")
+            record = _search_record(
+                metadata.get("title") or slug.replace("-", " ").title(),
+                f"/{slug}/",
+                "Page",
+                content,
+            )
+            if record:
+                records.append(record)
+
+    section_labels = {
+        "collaborators": "Collaborator",
+        "datasets": "Dataset",
+        "groups": "Group",
+        "people": "Person",
+        "posts": "Workshop",
+        "projects": "Project",
+        "publications": "Publication",
+        "resources": "Resource",
+        "series": "Series",
+        "software": "Software",
+        "talks": "Talk",
+    }
+    summary_fields = (
+        "summary",
+        "description",
+        "role",
+        "abstract",
+        "citation",
+        "maintainer",
+        "location",
+        "speaker",
+        "talk_month",
+        "workshop_time",
+    )
+
+    for collection_name, items in collections.items():
+        section = section_labels.get(collection_name, collection_name.title())
+        for item in items:
+            summary = " ".join(str(item.get(field, "")) for field in summary_fields)
+            record = _search_record(
+                item.get("title") or item.get("name"),
+                item.get("url"),
+                section,
+                item.get("content", ""),
+                summary,
+            )
+            if record:
+                records.append(record)
+
+    seen = set()
+    unique_records = []
+    for record in records:
+        key = record["url"]
+        if key in seen:
+            continue
+        seen.add(key)
+        unique_records.append(record)
+
+    output_path = os.path.join(generator.output_path, "search-index.json")
+    with open(output_path, "w", encoding="utf-8") as handle:
+        json.dump(unique_records, handle, ensure_ascii=False, indent=2)
 
 
 def build_collections(generator):
@@ -511,6 +615,8 @@ def build_collections(generator):
         "dsst/datasets/index.html",
         {**generator.context, "item": {"title": "DSST Curated Datasets"}},
     )
+
+    _build_search_index(generator, collections)
 
     # Keep the old short URLs for the two teams while the new group URLs settle in.
     for group in collections["groups"]:

@@ -115,6 +115,115 @@ img {
   text-decoration: underline;
 }
 
+.site-search {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.search-toggle {
+  display: inline-flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink);
+  background: white;
+  cursor: pointer;
+}
+
+.search-toggle:hover,
+.search-toggle:focus {
+  color: var(--brand);
+  border-color: var(--brand);
+}
+
+.search-toggle svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.search-panel {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: min(28rem, calc(100vw - 2rem));
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: white;
+  box-shadow: 0 18px 45px rgba(23, 32, 42, 0.18);
+}
+
+.search-form {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.search-form input {
+  width: 100%;
+  min-height: 2.5rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.55rem 0.7rem;
+  color: var(--ink);
+  font: inherit;
+}
+
+.search-form input:focus {
+  border-color: var(--brand);
+  outline: 2px solid rgba(40, 95, 143, 0.18);
+}
+
+.search-results {
+  max-height: 24rem;
+  overflow: auto;
+  padding: 0.35rem;
+}
+
+.search-result {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.65rem 0.7rem;
+  border-radius: 4px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.search-result:hover,
+.search-result:focus {
+  background: var(--soft);
+  text-decoration: none;
+}
+
+.search-result-section {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.search-result strong {
+  line-height: 1.3;
+}
+
+.search-result span:last-child {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.search-empty {
+  margin: 0;
+  padding: 0.8rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
 .hero,
 .section,
 .page {
@@ -860,6 +969,15 @@ img {
 
   .nav {
     justify-content: flex-start;
+  }
+
+  .site-search {
+    justify-self: start;
+  }
+
+  .search-panel {
+    left: 0;
+    right: auto;
   }
 
   .group-grid {
