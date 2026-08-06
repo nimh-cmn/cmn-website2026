@@ -1,5 +1,6 @@
 Title: Center for Multimodal Neuroimaging
 Slug: cmn
+Legacy_slug: cmn
 Short_name: CMN
 Summary: CMN connects NIMH neuroimaging cores, sections, teams, and users through shared resources, meetings, workshops, and cross-modal methods.
 Lead: Peter Bandettini and Peter Molfese

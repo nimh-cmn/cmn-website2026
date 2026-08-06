@@ -32,7 +32,7 @@ MARKDOWN = {
 PLUGINS = ["plugins.cmn_collections"]
 
 CMN_NAV = [
-    ("Groups", "/groups/"),
+    ("About", "/cmn/"),
     ("People", "/people/"),
     ("Projects", "/projects/"),
     ("Software", "/software/"),
