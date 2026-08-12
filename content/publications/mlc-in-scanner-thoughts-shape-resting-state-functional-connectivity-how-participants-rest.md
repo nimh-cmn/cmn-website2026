@@ -4,5 +4,5 @@ Date: 2026-01-01
 Group: mlc
 Publication_type: applications
 Application_category: cognitive psychology/neuroscience
-Citation: Gonzalez-Castillo J., Spurney M., Lam K.C., Gephart I. S., Pereira F., Handwerker D. A., Kam J. W. Y., Bandettini P.
+Citation: Gonzalez-Castillo J., Spurney M., Lam K.C., Gephart I. S., Pereira F., Handwerker D. A., Kam J. W. Y., Bandettini P. - in press at Nature Communications, 2026
 Paper_url: https://pmc.ncbi.nlm.nih.gov/articles/PMC11188111/pdf/nihpp-2024.06.05.596482v1.pdf
