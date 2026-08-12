@@ -1,6 +1,6 @@
 Title: Validating the Representational Space of Deep Reinforcement Learning Models of Behavior with Neural Data
 Slug: mlc-validating-the-representational-space-of-deep-reinforcement-learning-models-of-behavio
-Date: 2026-01-01
+Date: 2021-01-01
 Group: mlc
 Publication_type: methods
 Citation: "Validating the Representational Space of Deep Reinforcement Learning Models of Behavior with Neural Data" Bruch S. N. , McClure P., Zhou J., Schoenbaum G., Pereira F. bioRxiv preprint
