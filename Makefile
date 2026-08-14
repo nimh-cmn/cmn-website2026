@@ -1,5 +1,5 @@
-PYTHON ?= /Users/molfesepj/micromamba/envs/mne/bin/python
-PELICAN ?= /Users/molfesepj/micromamba/envs/mne/bin/pelican
+PYTHON ?= python3
+PELICAN ?= pelican
 PELICANOPTS ?=
 
 BASEDIR := $(CURDIR)
