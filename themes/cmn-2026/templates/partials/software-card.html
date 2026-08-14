@@ -1,4 +1,4 @@
-<article class="software-card">
+<article class="software-card publication-group-{{ tool.group|default('unknown') }}">
   <p class="eyebrow">{{ tool.group_abbreviation or tool.group|upper }}</p>
   <h3>
     <a href="{{ SITEURL }}{{ tool.url }}">{{ tool.title }}</a>

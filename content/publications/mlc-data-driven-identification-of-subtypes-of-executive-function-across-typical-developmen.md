@@ -2,6 +2,7 @@ Title: Data-driven identification of subtypes of executive function across typic
 Slug: mlc-data-driven-identification-of-subtypes-of-executive-function-across-typical-developmen
 Date: 2019-01-01
 Group: mlc
+People: Francisco Pereira
 Publication_type: applications
 Application_category: psychiatry
 Citation: Vaidya C., You X., Mostofsky S., Pereira F., Berl M., Kenworthy L. J Child Psychol Psychiatry 61(1): 51–61. 2019

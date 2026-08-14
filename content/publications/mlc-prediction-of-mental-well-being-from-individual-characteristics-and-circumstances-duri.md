@@ -2,6 +2,7 @@ Title: Prediction of mental well-being from individual characteristics and circu
 Slug: mlc-prediction-of-mental-well-being-from-individual-characteristics-and-circumstances-duri
 Date: 2022-01-01
 Group: mlc
+People: Francisco Pereira
 Publication_type: applications
 Application_category: psychiatry
 Citation: Harris C., Farmer C., Gibbon A., Shaw J., Thomas A., Atlas L. Y., Chung J. Y., Pereira F.

@@ -2,6 +2,7 @@ Title: Dissociable encoding of motivated behavior by parallel thalamo-striatal p
 Slug: mlc-dissociable-encoding-of-motivated-behavior-by-parallel-thalamo-striatal-projections
 Date: 2024-01-01
 Group: mlc
+People: Francisco Pereira, Gabriel Loewinger
 Publication_type: applications
 Application_category: neuroscience
 Citation: Beas S., Khan I., Gao C., Loewinger G., Macdonald E., Bashford A., Rodriguez-Gonzalez S., Pereira F., Penzo M.A. in Current Biology, 2024

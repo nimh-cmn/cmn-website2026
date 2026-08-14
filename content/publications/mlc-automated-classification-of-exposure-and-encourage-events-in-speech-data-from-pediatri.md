@@ -2,6 +2,7 @@ Title: Automated classification of exposure and encourage events in speech data 
 Slug: mlc-automated-classification-of-exposure-and-encourage-events-in-speech-data-from-pediatri
 Date: 2025-01-01
 Group: mlc
+People: Juan Antonio Lossio-Ventura
 Publication_type: applications
 Application_category: psychiatry
 Citation: Lossio-Ventura J.A., Frank S., Ringlein G., Bonson K., Olszko A., Knobel A., Pine D.S., Freeman J., Benito K., Jangraw D.C, in JAMIA Open 8 (6), 2025

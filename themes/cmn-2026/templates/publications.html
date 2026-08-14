@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block title %}Publications | {{ SITENAME }}{% endblock %}
+{% block title %}Recent Publications | {{ SITENAME }}{% endblock %}
 {% block content %}
 <section class="page">
   <header class="page-header">
-    <h1>Publications</h1>
+    <h1>Recent Publications</h1>
     <p>Publication entries are Markdown files so papers can be added one at a time.</p>
   </header>
   {% if publication_years %}
@@ -21,9 +21,15 @@
     <h2 id="year-{{ year }}" class="publication-year">{{ year }}</h2>
     {% set ns.current_year = year %}
     {% endif %}
-    <article class="publication-card">
+    <article class="publication-card publication-group-{{ publication.group|default('unknown') }}">
       <p class="meta">{{ publication.group_abbreviation or "" }}{% if publication.group_abbreviation and year %} / {% endif %}{{ year }}</p>
-      <h2><a href="{{ SITEURL }}{{ publication.url }}">{{ publication.title }}</a></h2>
+      <h2>
+        {% if publication.url %}
+        <a href="{{ publication.url }}">{{ publication.title }}</a>
+        {% else %}
+        {{ publication.title }}
+        {% endif %}
+      </h2>
       {% if publication.citation %}<p>{{ publication.citation }}</p>{% endif %}
       {% if publication.venue %}<p class="meta">{{ publication.venue }}</p>{% endif %}
     </article>

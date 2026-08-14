@@ -24,6 +24,26 @@
       {% if subheading %}<p>{{ subheading }}</p>{% endif %}
     </header>
     <div class="prose">{{ content }}</div>
+    {% if item.publications %}
+    <section class="subsection">
+      <h2>Recent Publications</h2>
+      <div class="publication-list">
+        {% for publication in item.publications %}
+        {% include "partials/publication-row.html" %}
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+    {% if item.software %}
+    <section class="subsection">
+      <h2>Software</h2>
+      <div class="software-grid">
+        {% for tool in item.software %}
+        {% include "partials/software-card.html" %}
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
   </div>
 </article>
 {% endblock %}

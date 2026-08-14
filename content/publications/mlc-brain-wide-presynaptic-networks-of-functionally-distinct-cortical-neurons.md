@@ -2,6 +2,7 @@ Title: Brain-wide presynaptic networks of functionally distinct cortical neurons
 Slug: mlc-brain-wide-presynaptic-networks-of-functionally-distinct-cortical-neurons
 Date: 2025-01-01
 Group: mlc
+People: Francisco Pereira, Ka Chun Lam, Yuan Zhao
 Publication_type: applications
 Application_category: neuroscience
 Citation: Inacio A. R., Lam K. C., Zhao Y., Pereira F., Gerfen C. R., Lee S. in Nature 1-11, 2025

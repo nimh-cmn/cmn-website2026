@@ -2,6 +2,7 @@ Title: Experimenter-free pain assessment in mice using a thermal gradient ring a
 Slug: mlc-experimenter-free-pain-assessment
 Date: 2026-01-01
 Group: mlc
+People: Gabriel Loewinger
 Publication_type: applications
 Application_category: neuroscience
 Citation: Garcia A., Siemian J. N., Loewinger G., Yadav P. M., Sarsfield S. - Pain Reports 11 (4), e1469, 2026

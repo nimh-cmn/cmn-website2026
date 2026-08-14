@@ -2,6 +2,7 @@ Title: Origins of Anhedonia in Childhood and Adolescence
 Slug: mlc-origins-of-anhedonia-in-childhood-and-adolescence
 Date: 2026-01-01
 Group: mlc
+People: Dylan Nielson
 Publication_type: applications
 Application_category: psychiatry
 Citation: "Origins of Anhedonia in Childhood and Adolescence" Prabhakar J., Nielson D.M., Stringaris A.

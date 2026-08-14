@@ -2,6 +2,7 @@ Title: Multivariate prediction of temper outbursts in a sample of youth enriched
 Slug: mlc-multivariate-prediction-of-temper-outbursts-in-a-sample-of-youth-enriched-for-irritabi
 Date: 2025-01-01
 Group: mlc
+People: Charles Zheng, Francisco Pereira
 Publication_type: applications
 Application_category: psychiatry
 Citation: Saha D., Naim R., Pereira F., Brotman M.A., Zheng C.Y. in PLoS one, vol. 30 (3), 2025

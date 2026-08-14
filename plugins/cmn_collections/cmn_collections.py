@@ -54,6 +54,13 @@ def _as_list(value):
     return [value]
 
 
+def _as_refs(value):
+    refs = []
+    for raw in _as_list(value):
+        refs.extend(part.strip() for part in re.split(r"[,;]", str(raw)) if part.strip())
+    return refs
+
+
 def _parse_links(value):
     links = []
     for raw in _as_list(value):
@@ -177,6 +184,23 @@ def _slugify(value):
     return re.sub(r"[^a-z0-9]+", "-", str(value).lower()).strip("-")
 
 
+def _external_url(value):
+    value = str(value or "").strip()
+    if value.startswith(("http://", "https://")):
+        return value
+    return ""
+
+
+def _publication_url(publication):
+    paper_url = _external_url(publication.get("paper_url"))
+    if paper_url:
+        return paper_url
+    doi = str(publication.get("doi") or "").strip()
+    if doi:
+        return f"https://doi.org/{doi}"
+    return ""
+
+
 def _plain_text(value):
     text = TAG_RE.sub(" ", str(value or ""))
     text = re.sub(r"&nbsp;?", " ", text)
@@ -256,6 +280,9 @@ def _read_collection(generator, collection_name, spec):
             "collection": collection_name,
             "url": item_url,
         }
+        if collection_name == "publications":
+            item["local_url"] = item_url
+            item["url"] = _publication_url(item)
         if collection_name == "people" and raw_slug != slug:
             item["legacy_slug"] = raw_slug
         if collection_name == "people":
@@ -496,6 +523,8 @@ def build_collections(generator):
         person["people_filter_slug"] = (
             _group_filter_slug(group) if group else person.get("team_link") or ""
         )
+        person["publications"] = []
+        person["software"] = []
     collections["people"].sort(key=_people_directory_sort_key)
 
     for tool in collections["software"]:
@@ -511,6 +540,8 @@ def build_collections(generator):
         )
         maintainer = str(tool.get("maintainer", "")).strip().lower()
         tool["maintainer_person"] = people_by_title.get(maintainer)
+        if tool["maintainer_person"]:
+            tool["maintainer_person"]["software"].append(tool)
 
     people_filter_groups = []
     for group in collections["groups"]:
@@ -551,10 +582,12 @@ def build_collections(generator):
         elif publication.get("group"):
             publication["group_abbreviation"] = str(publication.get("group")).upper()
         publication["people"] = [
-            people_by_slug.get(str(author_id))
-            for author_id in _as_list(publication.get("people"))
-            if people_by_slug.get(str(author_id))
+            people_by_slug.get(author_ref) or people_by_title.get(author_ref.lower())
+            for author_ref in _as_refs(publication.get("people"))
+            if people_by_slug.get(author_ref) or people_by_title.get(author_ref.lower())
         ]
+        for person in publication["people"]:
+            person["publications"].append(publication)
 
     publication_years = []
     seen_years = set()
@@ -605,6 +638,8 @@ def build_collections(generator):
     )
 
     for name, spec in COLLECTIONS.items():
+        if name == "publications":
+            continue
         for item in collections[name]:
             context = {**generator.context, **item, "item": item}
             _write_page(generator, spec["template"], spec["url"].format(slug=item["slug"]), context)

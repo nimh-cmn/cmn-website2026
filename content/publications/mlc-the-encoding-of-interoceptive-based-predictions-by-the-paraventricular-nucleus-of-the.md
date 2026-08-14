@@ -2,6 +2,7 @@ Title: The encoding of interoceptive-based predictions by the paraventricular nu
 Slug: mlc-the-encoding-of-interoceptive-based-predictions-by-the-paraventricular-nucleus-of-the
 Date: 2025-01-01
 Group: mlc
+People: Al Xin, Francisco Pereira, Gabriel Loewinger
 Publication_type: applications
 Application_category: neuroscience
 Citation: Machen B., Miller S., Xin A., Lampert C., Assaf L., Tucker J., Pereira F., Loewinger G., Beas S. in press at iScience, 2025

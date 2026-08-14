@@ -2,6 +2,7 @@ Title: Magnetoencephalographic Correlates of Mood and Reward Dynamics in Human A
 Slug: mlc-magnetoencephalographic-correlates-of-mood-and-reward-dynamics-in-human-adolescents
 Date: 2021-01-01
 Group: mlc
+People: Charles Zheng
 Publication_type: applications
 Application_category: psychiatry
 Citation: "Magnetoencephalographic Correlates of Mood and Reward Dynamics in Human Adolescents" Liuzzi, L., Chang, K.K., Zheng, C., Keren, H., Saha, D., Nielson, D.M. and Stringaris, A. Cerebral Cortex, 2021

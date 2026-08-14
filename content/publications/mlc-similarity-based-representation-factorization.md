@@ -2,6 +2,7 @@ Title: Similarity-based representation factorization for revealing interpretable
 Slug: mlc-similarity-based-representation-factorization
 Date: 2026-01-01
 Group: mlc
+People: Francisco Pereira, Ka Chun Lam
 Publication_type: preprint
 Citation: Mahner F. P., Lam K. C., Pereira F., Hebart M. N.
 Paper_url: https://arxiv.org/pdf/2605.26921

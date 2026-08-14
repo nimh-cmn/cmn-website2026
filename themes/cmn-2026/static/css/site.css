@@ -622,10 +622,25 @@ img {
 }
 
 .software-card {
+  position: relative;
+  overflow: hidden;
   padding: 1rem;
   border: 1px solid var(--line);
   border-radius: 6px;
   background: white;
+}
+
+.software-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--publication-accent, transparent);
+  opacity: 0.34;
+}
+
+.software-card > * {
+  position: relative;
 }
 
 .home-software-item,
@@ -832,8 +847,21 @@ img {
 }
 
 .publication-row {
-  padding: 0.85rem 0;
+  position: relative;
+  padding: 0.85rem 0 0.85rem 0.85rem;
   border-top: 1px solid var(--line);
+}
+
+.publication-row::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  bottom: 0.35rem;
+  left: 0;
+  width: 4px;
+  border-radius: 999px;
+  background: var(--publication-accent, transparent);
+  opacity: 0.32;
 }
 
 .publication-row h5 {
@@ -881,10 +909,39 @@ img {
 }
 
 .publication-card {
+  position: relative;
+  overflow: hidden;
   padding: 0.85rem;
   border: 1px solid var(--line);
   border-radius: 6px;
   background: white;
+}
+
+.publication-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--publication-accent, transparent);
+  opacity: 0.34;
+}
+
+.publication-card > * {
+  position: relative;
+}
+
+.publication-group-cmn {
+  --publication-accent: #2b70b9;
+}
+
+.publication-group-mlc,
+.publication-group-machine-learning-core {
+  --publication-accent: #3b8f5a;
+}
+
+.publication-group-dsst,
+.publication-group-data-science-sharing-team {
+  --publication-accent: #7a5ab5;
 }
 
 .publication-card h2 {

@@ -2,5 +2,7 @@ Title: Real-time variational method for learning neural trajectory and its dynam
 Slug: mlc-real-time-variational-method-for-learning-neural-trajectory-and-its-dynamics
 Date: 2023-01-01
 Group: mlc
+People: Yuan Zhao
 Publication_type: methods
 Citation: "Real-time variational method for learning neural trajectory and its dynamics" Matthew Dowling, Yuan Zhao, Il Memming Park in International Conference on Learning Representations, 2023
+Paper_url: https://openreview.net/forum?id=M_MvkWgQSt

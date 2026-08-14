@@ -1,9 +1,9 @@
-<article class="publication-row">
+<article class="publication-row publication-group-{{ publication.group|default('unknown') }}">
   <h5>
-    {% if publication.paper_url %}
-    <a href="{{ publication.paper_url }}">{{ publication.title }}</a>
+    {% if publication.url %}
+    <a href="{{ publication.url }}">{{ publication.title }}</a>
     {% else %}
-    <a href="{{ SITEURL }}{{ publication.url }}">{{ publication.title }}</a>
+    {{ publication.title }}
     {% endif %}
   </h5>
   {% if publication.citation %}<p>{{ publication.citation }}</p>{% endif %}

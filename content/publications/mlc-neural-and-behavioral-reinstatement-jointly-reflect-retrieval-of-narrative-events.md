@@ -2,6 +2,7 @@ Title: Neural and behavioral reinstatement jointly reflect retrieval of narrativ
 Slug: mlc-neural-and-behavioral-reinstatement-jointly-reflect-retrieval-of-narrative-events
 Date: 2025-01-01
 Group: mlc
+People: Francisco Pereira, Juan Antonio Lossio-Ventura
 Publication_type: applications
 Application_category: cognitive psychology/neuroscience
 Citation: Nau M., Greene A., Tarder-Stoll H., Lossio-Ventura J.A., Pereira F., Chen J., Baldassano C., Baker C.I. in press at Nature Communications, 2025
