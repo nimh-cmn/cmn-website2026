@@ -83,7 +83,43 @@ Title: Project Name
 Slug: project-name
 Group: cmn
 Summary: One sentence summary used in lists.
+People: Peter Molfese, 48
 
 Full project description goes here.
 ```
+
+The optional `People:` field connects a project to person profile pages. Use a
+comma- or semicolon-separated list of person names or legacy numeric slugs.
+
+Talk starter:
+
+```markdown
+Title: Talk Title
+Date: 2026-01-01
+Talk_month: January 2026
+Slug: talk-title
+Speaker_Slug: 48
+Part_of: [CMN Presentation Series](/talks/cmn-presentation-series/)
+External_url: https://example.org/talk
+
+Talk summary or abstract goes here.
+```
+
+Talks appear on person profile pages when `Speaker_Slug:`, `Speaker:`, or
+`Speakers:` matches a person name or legacy numeric slug. Use `External_url:`,
+`Talk_url:`, or `Video_url:` when the profile/talks-list card should link to
+another website instead of the local generated talk page.
+
+Person profile section links:
+
+Profile pages automatically show top anchor links for any sections that exist:
+`Projects`, `Talks`, `Publications`, and `Software`.
+
+These relationships are driven by metadata:
+
+- Projects: `People:` on project files.
+- Talks: `Speaker_Slug:`, `Speaker:`, or `Speakers:` on talk files.
+- Publications: `People:` on publication files.
+- Software: `Maintainer:` on software files.
+
 # cmn-website2026

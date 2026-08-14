@@ -3,6 +3,7 @@ import html
 import json
 import os
 import re
+import tempfile
 from pathlib import Path
 
 from pelican import signals
@@ -38,6 +39,10 @@ COLLECTIONS = {
         "url": "dsst/datasets/{slug}/index.html",
     },
 }
+
+
+_last_collection_generator = None
+_last_collections = None
 
 
 LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
@@ -201,6 +206,14 @@ def _publication_url(publication):
     return ""
 
 
+def _talk_external_url(metadata):
+    for field in ("external_url", "talk_url", "video_url"):
+        url = _external_url(metadata.get(field))
+        if url:
+            return url
+    return ""
+
+
 def _plain_text(value):
     text = TAG_RE.sub(" ", str(value or ""))
     text = re.sub(r"&nbsp;?", " ", text)
@@ -292,6 +305,8 @@ def _read_collection(generator, collection_name, spec):
         item["links"] = _parse_links(metadata.get("links"))
         item["part_of_links"] = _parse_links(metadata.get("part_of"))
         if collection_name == "talks":
+            item["external_url"] = _talk_external_url(metadata)
+            item["profile_url"] = item["external_url"] or item["url"]
             item["series_labels"] = [link["label"] for link in item["part_of_links"]]
             item["series_slugs"] = [_series_slug(label) for label in item["series_labels"]]
         if collection_name == "posts":
@@ -323,10 +338,20 @@ def _read_collection(generator, collection_name, spec):
 
 def _write_page(generator, template_name, output_save_as, context):
     output_path = os.path.join(generator.output_path, output_save_as)
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    output_dir = os.path.dirname(output_path)
+    os.makedirs(output_dir, exist_ok=True)
     template = generator.get_template(template_name)
-    with open(output_path, "w", encoding="utf-8") as handle:
-        handle.write(template.render(context))
+    rendered = template.render(context)
+    with tempfile.NamedTemporaryFile(
+        "w",
+        encoding="utf-8",
+        dir=output_dir,
+        delete=False,
+    ) as handle:
+        handle.write(rendered)
+        temp_path = handle.name
+    os.chmod(temp_path, 0o644)
+    os.replace(temp_path, output_path)
 
 
 def _search_record(title, url, section, content="", summary=""):
@@ -415,7 +440,32 @@ def _build_search_index(generator, collections):
         json.dump(unique_records, handle, ensure_ascii=False, indent=2)
 
 
+def _write_collection_pages(generator, collections):
+    for name, spec in COLLECTIONS.items():
+        if name == "publications":
+            continue
+        for item in collections[name]:
+            context = {**generator.context, **item, "item": item}
+            _write_page(generator, spec["template"], spec["url"].format(slug=item["slug"]), context)
+
+    _write_page(
+        generator,
+        "datasets",
+        "dsst/datasets/index.html",
+        {**generator.context, "item": {"title": "DSST Curated Datasets"}},
+    )
+
+    # Keep the old short URLs for the two teams while the new group URLs settle in.
+    for group in collections["groups"]:
+        legacy_slug = group.get("legacy_slug")
+        if legacy_slug:
+            context = {**generator.context, **group, "item": group}
+            _write_page(generator, "group", f"{legacy_slug}/index.html", context)
+
+
 def build_collections(generator):
+    global _last_collection_generator, _last_collections
+
     collections = {}
     for name, spec in COLLECTIONS.items():
         collections[name] = _read_collection(generator, name, spec)
@@ -523,9 +573,34 @@ def build_collections(generator):
         person["people_filter_slug"] = (
             _group_filter_slug(group) if group else person.get("team_link") or ""
         )
+        person["projects"] = []
+        person["talks"] = []
         person["publications"] = []
         person["software"] = []
     collections["people"].sort(key=_people_directory_sort_key)
+
+    for project in collections["projects"]:
+        project["people"] = [
+            people_by_slug.get(person_ref) or people_by_title.get(person_ref.lower())
+            for person_ref in _as_refs(project.get("people"))
+            if people_by_slug.get(person_ref) or people_by_title.get(person_ref.lower())
+        ]
+        for person in project["people"]:
+            person["projects"].append(project)
+
+    for talk in collections["talks"]:
+        speaker_refs = _as_refs(talk.get("speaker_slug"))
+        speaker_refs.extend(_as_refs(talk.get("speaker")))
+        speaker_refs.extend(_as_refs(talk.get("speakers")))
+        talk["people"] = []
+        seen_people = set()
+        for speaker_ref in speaker_refs:
+            person = people_by_slug.get(speaker_ref) or people_by_title.get(speaker_ref.lower())
+            if not person or person["slug"] in seen_people:
+                continue
+            seen_people.add(person["slug"])
+            talk["people"].append(person)
+            person["talks"].append(talk)
 
     for tool in collections["software"]:
         group = groups_by_key.get(str(tool.get("group")))
@@ -637,29 +712,18 @@ def build_collections(generator):
         }
     )
 
-    for name, spec in COLLECTIONS.items():
-        if name == "publications":
-            continue
-        for item in collections[name]:
-            context = {**generator.context, **item, "item": item}
-            _write_page(generator, spec["template"], spec["url"].format(slug=item["slug"]), context)
-
-    _write_page(
-        generator,
-        "datasets",
-        "dsst/datasets/index.html",
-        {**generator.context, "item": {"title": "DSST Curated Datasets"}},
-    )
-
+    _last_collection_generator = generator
+    _last_collections = collections
+    _write_collection_pages(generator, collections)
     _build_search_index(generator, collections)
 
-    # Keep the old short URLs for the two teams while the new group URLs settle in.
-    for group in collections["groups"]:
-        legacy_slug = group.get("legacy_slug")
-        if legacy_slug:
-            context = {**generator.context, **group, "item": group}
-            _write_page(generator, "group", f"{legacy_slug}/index.html", context)
+
+def rewrite_collection_pages(_pelican):
+    if _last_collection_generator is None or _last_collections is None:
+        return
+    _write_collection_pages(_last_collection_generator, _last_collections)
 
 
 def register():
     signals.article_generator_finalized.connect(build_collections)
+    signals.finalized.connect(rewrite_collection_pages)

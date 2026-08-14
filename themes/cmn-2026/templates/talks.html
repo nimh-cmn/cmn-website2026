@@ -20,7 +20,11 @@
     {% for talk in talks %}
     <article class="talk-list-item" data-talk-series="{{ talk.series_slugs|join(' ') }}">
       <p class="meta">{{ talk.talk_month }}</p>
-      <h2><a href="{{ SITEURL }}{{ talk.url }}">{{ talk.title }}</a></h2>
+      <h2>
+        <a href="{% if talk.profile_url.startswith('/') %}{{ SITEURL }}{{ talk.profile_url }}{% else %}{{ talk.profile_url }}{% endif %}">
+          {{ talk.title }}
+        </a>
+      </h2>
       {% if talk.part_of_links %}
       <p class="meta">
         {% for link in talk.part_of_links %}

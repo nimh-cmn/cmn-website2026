@@ -754,6 +754,30 @@ img {
   margin-top: 2rem;
 }
 
+.section-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: -0.25rem 0 1.25rem;
+}
+
+.section-nav a {
+  display: inline-block;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--soft);
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.section-nav a:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
 .publication-sections > section {
   margin-top: 1.25rem;
 }

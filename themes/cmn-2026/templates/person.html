@@ -23,9 +23,56 @@
       <h1>{{ title }}</h1>
       {% if subheading %}<p>{{ subheading }}</p>{% endif %}
     </header>
+    {% if item.projects or item.talks or item.publications or item.software %}
+    <nav class="section-nav" aria-label="{{ title }} sections">
+      {% if item.projects %}
+      <a href="#projects">Projects</a>
+      {% endif %}
+      {% if item.talks %}
+      <a href="#talks">Talks</a>
+      {% endif %}
+      {% if item.publications %}
+      <a href="#publications">Publications</a>
+      {% endif %}
+      {% if item.software %}
+      <a href="#software">Software</a>
+      {% endif %}
+    </nav>
+    {% endif %}
     <div class="prose">{{ content }}</div>
+    {% if item.projects %}
+    <section class="subsection" id="projects">
+      <h2>Projects</h2>
+      <div class="item-list">
+        {% for project in item.projects %}
+        <article>
+          <h3><a href="{{ SITEURL }}{{ project.url }}">{{ project.title }}</a></h3>
+          {% if project.summary %}<p>{{ project.summary|striptags }}</p>{% endif %}
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+    {% if item.talks %}
+    <section class="subsection" id="talks">
+      <h2>Talks</h2>
+      <div class="item-list">
+        {% for talk in item.talks %}
+        <article>
+          {% if talk.talk_month %}<p class="meta">{{ talk.talk_month }}</p>{% endif %}
+          <h3>
+            <a href="{% if talk.profile_url.startswith('/') %}{{ SITEURL }}{{ talk.profile_url }}{% else %}{{ talk.profile_url }}{% endif %}">
+              {{ talk.title }}
+            </a>
+          </h3>
+          {% if talk.content %}<p>{{ talk.content|striptags|truncate(180) }}</p>{% endif %}
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
     {% if item.publications %}
-    <section class="subsection">
+    <section class="subsection" id="publications">
       <h2>Recent Publications</h2>
       <div class="publication-list">
         {% for publication in item.publications %}
@@ -35,7 +82,7 @@
     </section>
     {% endif %}
     {% if item.software %}
-    <section class="subsection">
+    <section class="subsection" id="software">
       <h2>Software</h2>
       <div class="software-grid">
         {% for tool in item.software %}

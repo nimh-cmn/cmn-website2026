@@ -2,7 +2,7 @@ Title: In-Scanner Thoughts shape Resting-state Functional Connectivity: how part
 Slug: mlc-in-scanner-thoughts-shape-resting-state-functional-connectivity-how-participants-rest
 Date: 2026-01-01
 Group: mlc
-People: Francisco Pereira, Ka Chun Lam
+People: Francisco Pereira, Ka Chun Lam, Peter Bandettini
 Publication_type: applications
 Application_category: cognitive psychology/neuroscience
 Citation: Gonzalez-Castillo J., Spurney M., Lam K.C., Gephart I. S., Pereira F., Handwerker D. A., Kam J. W. Y., Bandettini P. - in press at Nature Communications, 2026
