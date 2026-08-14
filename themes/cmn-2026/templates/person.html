@@ -23,6 +23,7 @@
       <h1>{{ title }}</h1>
       {% if subheading %}<p>{{ subheading }}</p>{% endif %}
     </header>
+    <div class="prose">{{ content }}</div>
     {% if item.projects or item.talks or item.publications or item.software %}
     <nav class="section-nav" aria-label="{{ title }} sections">
       {% if item.projects %}
@@ -39,7 +40,6 @@
       {% endif %}
     </nav>
     {% endif %}
-    <div class="prose">{{ content }}</div>
     {% if item.projects %}
     <section class="subsection" id="projects">
       <h2>Projects</h2>
