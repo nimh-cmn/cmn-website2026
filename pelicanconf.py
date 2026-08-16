@@ -38,7 +38,7 @@ CMN_NAV = [
     ("Software", "/software/"),
     ("Publications", "/publications/"),
     ("Talks", "/talks/"),
-    ("Workshops", "/posts/"),
+    ("Workshops", "/workshops/"),
 ]
 
 FEED_ALL_ATOM = None
