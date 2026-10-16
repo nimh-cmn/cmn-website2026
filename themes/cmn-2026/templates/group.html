@@ -21,6 +21,18 @@
   </section>
   {% endif %}
 
+  {% if item.contributors %}
+  <section class="subsection">
+    <h2>Contributors</h2>
+    <div class="people-grid">
+      {% for person in item.contributors %}
+      {% set hide_person_group = true %}
+      {% include "partials/person-card.html" %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
   {% if item.former_people %}
   <section class="subsection">
     <h2>Former Team Members</h2>

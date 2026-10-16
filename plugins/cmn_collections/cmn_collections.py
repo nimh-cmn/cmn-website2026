@@ -243,7 +243,10 @@ def _is_former_person(person):
 def _people_status(person):
     if _is_former_person(person):
         return "Alumni"
-    return str(person.get("employee_status", "")).strip()
+    status = str(person.get("employee_status", "")).strip()
+    if status.lower() == "member":
+        return "Active"
+    return status
 
 
 def _group_filter_slug(group):
@@ -500,6 +503,13 @@ def build_collections(generator):
                 _person_sort_key(person),
             )
         )
+        group["contributors"] = [
+            person
+            for person in collections["people"]
+            if person.get("team_link") in aliases
+            and person.get("people_status") == "Contributors"
+        ]
+        group["contributors"].sort(key=_person_sort_key)
         group["former_people"] = [
             person
             for person in collections["people"]

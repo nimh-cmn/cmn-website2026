@@ -6,7 +6,7 @@ Place: Member
 Team_Link: dsst
 Slug: 81
 Date: 2010-12-03 10:20
-Employee_Status: Contributors
+Employee_Status: Member
 GitHub: https://github.com/ericearl
 Google_Scholar: https://scholar.google.com/citations?user=8IwbaOcAAAAJ
 Impactstory: https://profiles.impactstory.org/u/0000-0001-5512-0083
