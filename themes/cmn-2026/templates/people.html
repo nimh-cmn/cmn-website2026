@@ -4,11 +4,11 @@
 <section class="page">
   <header class="page-header">
     <h1>People</h1>
-    <p>Current members and alumni represented in the CMN groups.</p>
+    <p>Current members, contributors, and alumni represented in the CMN groups.</p>
   </header>
   <div class="filter-tabs" role="tablist" aria-label="Filter people by team or core">
     <button class="filter-tab is-active" type="button" data-people-filter="all">
-      All <span>{{ people|selectattr("people_status", "in", ["Active", "Alumni"])|list|length }}</span>
+      All <span>{{ people|selectattr("show_in_people_directory")|list|length }}</span>
     </button>
     {% for group in people_filter_groups %}
     <button class="filter-tab" type="button" data-people-filter="{{ group.slug }}">
@@ -16,18 +16,26 @@
     </button>
     {% endfor %}
   </div>
-  {% for status in ["Active", "Alumni"] %}
   <section class="subsection people-filter-section">
-    <h2>{{ "Members" if status == "Active" else "Former Team Members" }}</h2>
+    <h2>Members</h2>
     <div class="people-grid">
-      {% for person in people if person.people_status == status %}
+      {% for person in people if person.people_status == "Active" or (person.people_status == "Contributors" and person.group) %}
       <div class="people-filter-item" data-people-team="{{ person.people_filter_slug }}">
       {% include "partials/person-card.html" %}
       </div>
       {% endfor %}
     </div>
   </section>
-  {% endfor %}
+  <section class="subsection people-filter-section">
+    <h2>Former Team Members</h2>
+    <div class="people-grid">
+      {% for person in people if person.people_status == "Alumni" %}
+      <div class="people-filter-item" data-people-team="{{ person.people_filter_slug }}">
+      {% include "partials/person-card.html" %}
+      </div>
+      {% endfor %}
+    </div>
+  </section>
 </section>
 <script>
   document.querySelectorAll('[data-people-filter]').forEach((button) => {

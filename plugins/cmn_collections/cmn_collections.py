@@ -261,7 +261,7 @@ def _metadata_int(value, default):
 
 
 def _people_directory_sort_key(person):
-    status_order = {"Active": 0, "Alumni": 1}
+    status_order = {"Active": 0, "Contributors": 0, "Alumni": 1}
     group = person.get("group") or {}
     group_slug = _group_filter_slug(group) if group else person.get("team_link", "")
 
@@ -583,6 +583,10 @@ def build_collections(generator):
         person["people_filter_slug"] = (
             _group_filter_slug(group) if group else person.get("team_link") or ""
         )
+        person["show_in_people_directory"] = person.get("people_status") in {
+            "Active",
+            "Alumni",
+        } or (person.get("people_status") == "Contributors" and bool(group))
         person["projects"] = []
         person["talks"] = []
         person["publications"] = []
@@ -635,7 +639,7 @@ def build_collections(generator):
             1
             for person in collections["people"]
             if person.get("team_link") in aliases
-            and person.get("people_status") in {"Active", "Alumni"}
+            and person.get("people_status") in {"Active", "Contributors", "Alumni"}
         )
         if count:
             people_filter_groups.append(
