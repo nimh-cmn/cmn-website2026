@@ -2,7 +2,7 @@ Title: egi-pynetstation
 Slug: pynetstation
 Group: cmn
 External_url: https://github.com/nimh-sfim/egi-pynetstation
-Tutorial: https://psychopy.org/hardware/egiNetStation.html
+Tutorial: https://egi-pynetstation.readthedocs.io/en/latest/
 Summary: Python package for communicating with EGI EEG Amplifiers
 Maintainer: Peter Molfese
 Weight: 7
