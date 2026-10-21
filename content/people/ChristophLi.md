@@ -1,6 +1,6 @@
 Title: Christoph Li
 Position: Postbac IRTA
-Image: 
+Image: people/dsst/christoph-li.jpg
 Slug: 98
 Date: 2024-10-20 19:30
 Team: Data Science and Sharing Team
