@@ -12,3 +12,4 @@ Subheading: Current: Founder of Python AI Solutions
 Team: Data Science and Sharing Team
 Place: Former Team Members
 Team_Link: dsst
+Sort_Order: 1

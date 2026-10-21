@@ -11,3 +11,4 @@ Subheading: Current: Research Data Analyst at the California Policy Lab
 Team: Data Science and Sharing Team
 Place: Former Team Members
 Team_Link: dsst
+Sort_Order: 2

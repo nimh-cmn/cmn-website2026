@@ -516,7 +516,12 @@ def build_collections(generator):
             if person.get("team_link") in aliases
             and _is_former_person(person)
         ]
-        group["former_people"].sort(key=_person_sort_key)
+        group["former_people"].sort(
+            key=lambda person: (
+                int(person.get("sort_order", 50)),
+                _person_sort_key(person),
+            )
+        )
         group["projects"] = [
             project
             for project in collections["projects"]

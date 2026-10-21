@@ -9,5 +9,4 @@ Employee_Status: Active
 Team: Data Science and Sharing Team
 Place: Former Team Members
 Team_Link: dsst
-
-Arshitha Basavaraj
+Sort_Order: 5
